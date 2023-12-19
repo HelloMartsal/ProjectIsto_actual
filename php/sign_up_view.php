@@ -12,6 +12,7 @@ function check_sign_up_errors(){
         }
 
         unset($_SESSION["sign_up_errors"]);
+        
     }
     
     
