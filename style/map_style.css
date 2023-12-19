@@ -1,0 +1,97 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+#map {
+    height: 500px;
+    width: 100%;
+    max-width: 600px;
+}
+
+#confirmationModal {
+    text-align: center;
+    margin-top: 20px; /* Adjust the margin as needed */
+}
+
+.leaflet-container {
+    height: 400px;
+    width: 100%;
+    max-width: 600px;
+    max-height: 100%;
+    border-radius: 30px;
+}
+
+/* pop-up style */
+.leaflet-popup-content {
+    max-width: 250px;
+    text-align: left;
+    padding: 8px;
+    border-radius: 8px;
+    box-shadow: 0 3px 8px rgba(12, 12, 12, 0.3);
+    background-color: rgb(25, 99, 41);
+    color: #f8f8f8;
+}
+
+/* zoom control */
+.leaflet-control-zoom {
+    background-color: #07140d;
+    border-radius: 8px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* (Zoom control) buttons */
+.leaflet-control-zoom a {
+    line-height: 30px;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    box-shadow: 0 3px 8px rgba(2, 2, 2, 0.3);
+    background-color: rgb(49, 131, 77);
+    color: rgb(10, 0, 0)a3a;
+}
+
+/* (Zoom control) when the mouse is over */
+.leaflet-control-zoom a:hover {
+    background-color: #27ae60;
+}
+
+/* color of the marker icon */
+.leaflet-marker-icon {
+    border-radius: 50%;
+}
+
+/* style for the marker icons */
+.leaflet-marker-icon {
+    background-color: rgb(41, 141, 83);
+    border: 2px solid #1d0b0b;
+}
+
+/* style for the external border of the map */
+.leaflet-container {
+    border: 6px solid #0d771d;
+    border-radius: 30px;
+    overflow: hidden;
+}
+
+/* style for control layers */
+.leaflet-control-layers {
+    background-color: #2b6110;
+    border: 2px solid #e1e6e9;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(236, 227, 227, 0.1);
+}
+
+/* style for the label of the control layers */
+.leaflet-control-layers label {
+    color: #e3e6e9;
+}
+
+/* style for checkboxes of the layers */
+.leaflet-control-layers input[type="checkbox"] {
+    margin-right: 5px;
+}
