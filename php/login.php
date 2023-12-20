@@ -23,14 +23,16 @@ if($_SERVER["REQUEST_METHOD"]==="POST"){
         }
         require_once 'config_sess.php'; //Ξεκινάμε session
         if ($errors){
-            session_unset();            
+            session_unset();
+            regenerate_session_whid();
+            unset($_SESSION["login_errors"]);         
             $_SESSION["login_errors"] = $errors;
             
             header("Location:../login_page.php");
             die();           
         }
         session_unset();
-        session_regenerate_id();
+        regenerate_session_whid();
         $userdata = fetch_user($conn,$username1);
         $_SESSION["user_id"]=$userdata["user_id"];
         $_SESSION["user_type"]=$userdata["usertype"];
