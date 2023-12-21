@@ -89,10 +89,6 @@ function handleMarkers(data, map) {
                 baseLayersGroup.addLayer(marker);
         
             }
-            if (marker1 && marker2) {
-                var latlngs = Array(marker1.getLatLng(), marker2.getLatLng());
-                var line = L.polyline(latlngs, { color: 'blue' }).addTo(map);
-            }
     
     };
     var prev_coordinates = marker.getLatLng();
