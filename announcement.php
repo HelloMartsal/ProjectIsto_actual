@@ -19,12 +19,13 @@
             <textarea id="content" name="content" rows="4" required></textarea>
 
             <label for="categories">Categories:</label>
-            <select id="categories" name="categories[]" multiple required>
+            <select id="categories" name="categories[]" required>
                 <!-- Categories will be dynamically populated using JavaScript -->
             </select>
-            <select id="items" name="items[]" multiple required>
-                <!-- Categories will be dynamically populated using JavaScript -->
-            </select>
+            <label for="items">Items:</label>
+            <div id="items">
+                <!-- Items will be dynamically populated using JavaScript -->
+            </div>
 
             <button type="button" onclick="submitForm()">Submit</button>
         </form>

@@ -1,4 +1,3 @@
-// Fetch categories from the server and populate the multi-select dropdown
 $(document).ready(function () {
     $.ajax({
         url: '../php/print_data.php',
@@ -16,6 +15,7 @@ $(document).ready(function () {
         }
     });
 });
+var items = [];
 $(document).ready(function () {
     $.ajax({
         url: '../php/print_data.php',
@@ -23,30 +23,72 @@ $(document).ready(function () {
         data: { dataType: 'items' },
         dataType: 'json',
         success: function (data) {
-            var dropdown1 = $('#items');
-            $.each(data, function (index, item) {
-                dropdown1.append($('<option></option>').attr('value', item.product_id).text(item.product_name));
-            });
+            items = data;
+            var event = new Event('change');
+            document.getElementById('categories').dispatchEvent(event);
         },
         error: function () {
             console.error('Error fetching categories');
         }
     });
 });
+var selectedItems = [];
 
-// Function to handle form submission
+
+
+document.getElementById('categories').addEventListener('change', function() {
+    $('#items').html('');
+    var selectedCategory = this.value; // Get the selected category
+    if (this.value === ''){
+        selectedCategory = "1";
+    };
+    var filteredItems = items.filter(function(item) {
+        return item.category == selectedCategory; 
+    });
+    $.each(filteredItems, function(i, item) {
+        var checkbox = $('<input>', { 
+            type: 'checkbox',
+            id:item.product_id,
+            value: item.product_id,
+            checked: selectedItems.includes(item.product_id)
+        });
+        $('#items').append(
+            checkbox,
+            $('<label>', { 
+                for:item.producut_id,
+                text: item.product_name 
+            }),
+            $('<br>') 
+        );
+
+        checkbox.on('change', function() {
+            var id = Number(this.id);
+            if(this.checked) {
+                selectedItems.push(id);
+            } else {
+                var index = selectedItems.indexOf(id); // Find the index of the id in the selectedItems array
+                if(index !== -1) selectedItems.splice(index, 1); // Remove the id from the selectedItems array if the checkbox is unchecked
+            }
+        });
+    });
+});
+
+
+
+
+
 function submitForm() {
     var title = $('#title').val();
     var content = $('#content').val();
-    var categories = $('#categories').val(); // Get an array of selected category values
+    var items = JSON.stringify(selectedItems);
+    console.log(items);
+    console.log(title);
+    console.log(content);
 
-    // You can perform additional validation here
-
-    // Use jQuery to make an AJAX request to process.php
     $.ajax({
         type: 'POST',
         url: '../php/store_announ.php',
-        data: { title: title, content: content, categories: categories },
+        data: { title: title, content: content, items: items },
         success: function (data) {
             $('#result').html(data);
         },
