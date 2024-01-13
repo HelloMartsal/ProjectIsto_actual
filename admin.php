@@ -34,8 +34,8 @@ if ($_SESSION["user_type"]!=="admin"){
             <a href="map_page.php">Χάρτης</a>
             <a href="contact.php">Επικοινωνία</a>
             <a href="create_savior_page.php">Δημιουργία Διασώστη</a>
-            <a href="php/logout.php">Αποσύνδεση</a>
-            <a href="announcement.php">test</a>
+            <a href="logout.php">Αποσύνδεση</a>
+            <a href="announcement.php">Ανακοινώσεις</a>
 
 
         </div>
