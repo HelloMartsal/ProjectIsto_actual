@@ -22,14 +22,20 @@
             <select id="categories" name="categories[]" multiple required>
                 <!-- Categories will be dynamically populated using JavaScript -->
             </select>
+            <select id="items" name="items[]" multiple required>
+                <!-- Categories will be dynamically populated using JavaScript -->
+            </select>
 
             <button type="button" onclick="submitForm()">Submit</button>
         </form>
+        <a href="index.php">
+                <button>Add Category or Item</button>
+        </a>
 
         <div id="result"></div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="script/test_script.js"></script>
+    <script src="script/blog_script.js"></script>
 </body>
 </html>

@@ -1,14 +1,31 @@
 // Fetch categories from the server and populate the multi-select dropdown
 $(document).ready(function () {
     $.ajax({
-        url: '../php/process_two.php',
+        url: '../php/print_data.php',
         type: 'GET',
+        data: { dataType: 'categories' },
         dataType: 'json',
         success: function (data) {
-            // Populate the multi-select dropdown with category options
             var dropdown = $('#categories');
             $.each(data, function (index, category) {
                 dropdown.append($('<option></option>').attr('value', category.cat_id).text(category.cat_name));
+            });
+        },
+        error: function () {
+            console.error('Error fetching categories');
+        }
+    });
+});
+$(document).ready(function () {
+    $.ajax({
+        url: '../php/print_data.php',
+        type: 'GET',
+        data: { dataType: 'items' },
+        dataType: 'json',
+        success: function (data) {
+            var dropdown1 = $('#items');
+            $.each(data, function (index, item) {
+                dropdown1.append($('<option></option>').attr('value', item.product_id).text(item.product_name));
             });
         },
         error: function () {
@@ -28,7 +45,7 @@ function submitForm() {
     // Use jQuery to make an AJAX request to process.php
     $.ajax({
         type: 'POST',
-        url: '../php/process.php',
+        url: '../php/store_announ.php',
         data: { title: title, content: content, categories: categories },
         success: function (data) {
             $('#result').html(data);

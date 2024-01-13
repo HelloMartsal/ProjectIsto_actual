@@ -35,7 +35,7 @@ if ($_SESSION["user_type"]!=="admin"){
             <a href="contact.php">Επικοινωνία</a>
             <a href="create_savior_page.php">Δημιουργία Διασώστη</a>
             <a href="php/logout.php">Αποσύνδεση</a>
-            <a href="test.php">test</a>
+            <a href="announcement.php">test</a>
 
 
         </div>
