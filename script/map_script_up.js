@@ -1,5 +1,4 @@
 //TODO KANTO NA DOYLEUEI ME DIO BASE ISOS
-//TODO FTIA3E TA BLUE LINES
 function init() {
     var map = L.map('map').setView([38.246254, 21.735125], 15);
     var osmLink = "<a href='http://www.openstreetmap.org'>Open StreetMap</a>";
