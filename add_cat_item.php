@@ -92,6 +92,7 @@ function prepareAndSendData() {
     return false;
 }
     </script>
+    <!-- TODO create the category managment -->
     <form action="php/push_cat.php" method="post">
     <h1>Add New Category</h1>
         <label for="category_name">Category Name:</label><br>
@@ -101,12 +102,14 @@ function prepareAndSendData() {
 
     </div>
     <div class="form-container">
+        <!-- TODO create the url managment -->
     <form action="php/load_url.php" method="post">
     <h1>Enter URL</h1>
         <label for="url">URL:</label><br>
         <input type="text" id="url" name="url"><br>
         <input type="submit" value="Submit">
     </form>
+    <!-- TODO create the upload managment -->
     <form action="php/json_upload.php" method="post" enctype="multipart/form-data">
     <h1>Upload JSON File</h1>    
     <label for="jsonFile">File:</label><br>
@@ -114,6 +117,6 @@ function prepareAndSendData() {
         <input type="submit" value="Upload">
     </form>
     </div>
-    <!-- Print the base down here -->
+    <!-- TODO Print the base down here -->
 </body>
 </html>
