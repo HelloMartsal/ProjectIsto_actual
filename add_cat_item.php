@@ -1,6 +1,7 @@
 <?php
 require_once 'php/config_sess.php';
 require_once 'php/push_pro_view.php';
+require_once 'php/push_cat_view.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -42,11 +43,15 @@ require_once 'php/push_pro_view.php';
         <input type="submit" value="Submit">
     </form>
     <!-- TODO create the category managment -->
-    <form action="php/push_cat.php" method="post">
+    <form action="php/push_cat.php" method="post" >
+    <div id="response1"></div>
+    <?php
+    show_new_category();
+    ?>
     <h1>Add New Category</h1>
         <label for="category_name">Category Name:</label><br>
         <input type="text" id="category_name" name="category_name" required><br>
-        <input type="button" value="Submit">
+        <input type="submit" value="Submit">
     </form>
 
     </div>
@@ -68,4 +73,7 @@ require_once 'php/push_pro_view.php';
     </div>
     <!-- TODO Print the base down here -->
 </body>
+<?php
+var_dump($_SESSION);
+?>
 </html>

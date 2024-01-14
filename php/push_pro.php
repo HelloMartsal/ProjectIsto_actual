@@ -11,6 +11,7 @@ if($_SERVER["REQUEST_METHOD"]==="POST"){
         require_once 'push_pro_control.php';
         require_once 'config_sess.php';
         $category = intval($data['category']);
+        // TODO : check if the item already exists
         $_SESSION['category'] = $category;
         $_SESSION['name'] = $name;
         $_SESSION['details'] = $details;
