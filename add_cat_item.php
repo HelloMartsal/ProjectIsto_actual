@@ -42,7 +42,6 @@ require_once 'php/push_cat_view.php';
         <input type="button" value="Add More Details" onclick="addDetails()">
         <input type="submit" value="Submit">
     </form>
-    <!-- TODO create the category managment -->
     <form action="php/push_cat.php" method="post" >
     <div id="response1"></div>
     <?php
