@@ -32,7 +32,7 @@ if ($_SESSION["user_type"]!=="admin"){
         <div class="sidebar">
             <a href="login_page.php">Σύνδεση στον λογαριασμό</a>
             <a href="map_page.php">Χάρτης</a>
-            <a href="contact.php">Επικοινωνία</a>
+            <a href="add_cat_item.php">Επικοινωνία</a>
             <a href="create_savior_page.php">Δημιουργία Διασώστη</a>
             <a href="logout.php">Αποσύνδεση</a>
             <a href="announcement.php">Ανακοινώσεις</a>
