@@ -1,4 +1,6 @@
 <?php
+require_once 'php/config_sess.php';
+require_once 'php/push_pro_view.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -25,6 +27,7 @@
     <div class="form-container">
     
     <form  onsubmit="return prepareAndSendData(event)">
+    <div id="response"></div>
     <h1>Add New Item</h1>
         <label for="item_name">Item Name:</label><br>
         <input type="text" id="item_name" name="item_name" required><br>

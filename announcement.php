@@ -1,3 +1,6 @@
+<?php
+require_once 'php/config_sess.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
