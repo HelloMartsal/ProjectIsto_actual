@@ -1,15 +1,13 @@
 <?php
-
-    $json = file_get_contents('http://usidas.ceid.upatras.gr/web/2023/export.php');
-    $obj = json_decode($json,true);
-    foreach ($obj['items'] as $item) {
-        echo $item['name'] . "<br>";
-      }
-
-?>
-<?php
 if($_SERVER["REQUEST_METHOD"]==="POST"){
-
+    $json = file_get_contents('php://input');
+    $data = json_decode($json,true);
+    $name = $data['name'];
+    $category = $data['category'];
+    $details = $data['details'];
+    var_dump($name);
+    var_dump($category);
+    var_dump($details); 
     try {
         require_once 'dbc.php';
         require_once 'push_pro_model.php';
