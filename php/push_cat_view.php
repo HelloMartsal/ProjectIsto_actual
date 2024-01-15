@@ -9,3 +9,4 @@ function show_new_category(){
     }
 
 }
+?>

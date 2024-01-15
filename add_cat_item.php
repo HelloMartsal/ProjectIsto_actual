@@ -2,6 +2,10 @@
 require_once 'php/config_sess.php';
 require_once 'php/push_pro_view.php';
 require_once 'php/push_cat_view.php';
+require_once 'php/load_url_view.php';
+if ($_SESSION["user_type"]!=="admin"){
+    header("Location:../login_page.php");
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -57,6 +61,9 @@ require_once 'php/push_cat_view.php';
     <div class="form-container">
         <!-- TODO create the url managment -->
     <form action="php/load_url.php" method="post">
+        <?php
+        show_url_errors();
+        ?>
     <h1>Enter URL</h1>
         <label for="url">URL:</label><br>
         <input type="text" id="url" name="url" required><br>
