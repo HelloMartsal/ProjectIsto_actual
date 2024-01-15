@@ -1,4 +1,5 @@
 //TODO KANTO NA DOYLEUEI ME DIO BASE ISOS
+//TODO PREPEI NA TYPONEI OFFERS KAI REQUESTS ANTI GIA CITIZENS
 function init() {
     var map = L.map('map').setView([38.246254, 21.735125], 15);
     var osmLink = "<a href='http://www.openstreetmap.org'>Open StreetMap</a>";

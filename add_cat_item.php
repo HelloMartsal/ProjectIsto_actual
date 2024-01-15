@@ -59,7 +59,6 @@ if ($_SESSION["user_type"]!=="admin"){
 
     </div>
     <div class="form-container">
-        <!-- TODO create the url managment -->
     <form action="php/load_url.php" method="post">
         <?php
         show_url_errors();
@@ -69,7 +68,6 @@ if ($_SESSION["user_type"]!=="admin"){
         <input type="text" id="url" name="url" required><br>
         <input type="submit" value="Submit">
     </form>
-    <!-- TODO create the upload managment -->
     <form action="php/json_upload.php" method="post" enctype="multipart/form-data">
     <h1>Upload JSON File</h1>    
     <label for="jsonFile">File:</label><br>
@@ -77,7 +75,7 @@ if ($_SESSION["user_type"]!=="admin"){
         <input type="submit" value="Upload">
     </form>
     </div>
-    <!-- TODO Print the base down here -->
+    <!-- TODO Print the base down here load.js tou mitsou-->
 </body>
 <?php
 var_dump($_SESSION);

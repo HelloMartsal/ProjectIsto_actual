@@ -34,3 +34,6 @@ $url = $_POST["url"];
    header("Location:../index.php"); 
 }
 ?>
+//TODO if the category_name already exists then ignore. if the cat_id is already used change the id and then update the items.
+//TODO if the item_id is already used change the id.
+//TODO Xrisimopoiise ton kodika toy mitsou
