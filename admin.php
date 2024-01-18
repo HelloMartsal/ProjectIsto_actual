@@ -38,6 +38,7 @@ if ($_SESSION["user_type"]!=="admin"){
             <a href="announcement.php">Ανακοινώσεις</a>
             <a href="add_cat_item.php">Προσθήκη Βάσης</a>
             <a href="some.php">Διαχείρηση Βάσης</a>
+            <a href="graph.php">Διαχείρηση Offers και Request</a>
 
 
         </div>
