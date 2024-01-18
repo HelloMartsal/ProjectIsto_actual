@@ -1,4 +1,9 @@
-
+<?php
+require_once 'php/config_sess.php';
+if ($_SESSION["user_type"]!=="admin"){
+    header("Location:../login_page.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
