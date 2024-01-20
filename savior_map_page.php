@@ -14,7 +14,7 @@ if ($_SESSION["user_type"]!=="savior"){
           integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
           crossorigin=""/>
     <link rel="stylesheet" href="style/map_style.css"/>
-    <script src="script/map_script_up.js"></script>
+    <script src="script/savior_map_script.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/dark.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -35,7 +35,7 @@ if ($_SESSION["user_type"]!=="savior"){
     <script src="https://unpkg.com/leaflet-draggable/dist/leaflet.draggable.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="script/savior_map_script_up.js"></script>
+    <script src="script/savior_map_script.js"></script>
 </body>
 <?php
 var_dump($_SESSION);

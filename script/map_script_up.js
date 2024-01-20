@@ -29,17 +29,9 @@ function make_ajax_post(marker){
 
 function handleMarkers(data, map) {
     var saviorsLayerGroup = L.layerGroup().addTo(map);
-    var citizensLayerGroup = L.layerGroup().addTo(map);
     var baseLayersGroup = L.layerGroup().addTo(map);
     var requestLayerGroup = L.layerGroup().addTo(map);
     var offerLayerGroup = L.layerGroup().addTo(map);
-
-    var customIcon1 = L.icon({
-        iconUrl: '../assets/my_icon_map.png',
-        iconSize: [35, 35],
-        iconAnchor: [16, 32],
-        popupAnchor: [0, -32]
-    });
 
     var customIcon2 = L.icon({
         iconUrl: '../assets/fireman_icon_map.png',
@@ -208,7 +200,8 @@ function handleMarkers(data, map) {
 
         const layerControl = L.control.layers(baseLayers).addTo(map);
         layerControl.addBaseLayer(openTopoMap, 'OpenTopoMap');
-        layerControl.addOverlay(citizensLayerGroup, 'citizens');
+        layerControl.addOverlay(requestLayerGroup, 'request');
+        layerControl.addOverlay(offerLayerGroup, 'offer');
         layerControl.addOverlay(baseLayersGroup, 'base');
         layerControl.addOverlay(saviorsLayerGroup, 'savior');
 }
