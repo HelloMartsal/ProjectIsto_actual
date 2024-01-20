@@ -93,10 +93,10 @@ function handleMarkers(data, map) {
         marker2.on('popupopen', function() {
             var btn = document.getElementById('delivery');
             btn.addEventListener('click', function() {
-                if (inrangeToBase(marker1, marker2,100)) {
+                if (inrange(marker1, this, 100)) {
                     alert('Παράδωση Επιτυχής');
                 }
-            });
+            }.bind(this));
         });
     }
     var request_markers = [];
@@ -138,10 +138,10 @@ function handleMarkers(data, map) {
         marker4.on('popupopen', function() {
             var btn = document.getElementById('delivery');
             btn.addEventListener('click', function() {
-                if (inrange(marker1, marker4,50)) {
+                if (inrange(marker1, this, 50)) {
                     alert('Παράδωση Επιτυχής');
                 }
-            });
+            }.bind(this)); 
         });
     };
     var offer_markers = [];
@@ -183,10 +183,10 @@ function handleMarkers(data, map) {
         marker5.on('popupopen', function() {
             var btn = document.getElementById('extract');
             btn.addEventListener('click', function() {
-                if(inrange(marker1, marker5,50)){
+                if(inrange(marker1, this, 50)){
                     alert('Παραλαβή Επιτυχής');
                 }
-            });
+            }.bind(this));
         });
     };
     
