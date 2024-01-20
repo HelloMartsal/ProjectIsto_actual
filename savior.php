@@ -30,6 +30,7 @@ if ($_SESSION["user_type"]!=="savior"){
         <div class="sidebar">
             <a href="login_page.php">Σύνδεση στον λογαριασμό</a>
             <a href="contact.php">Επικοινωνία</a>
+            <a href="savior_map.php">Χάρτης</a>
             <a href="logout.php">Αποσύνδεση</a>
 
         </div>
