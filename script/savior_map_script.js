@@ -13,7 +13,7 @@ function make_ajax_post(marker){
     var coordinates = marker.getLatLng();
     $.ajax({
         type: 'POST',
-        url: '../php/store_coordinates.php',
+        url: '../php/savior_save_pos.php',
         data: {
             lat: coordinates.lat,
             lng: coordinates.lng
@@ -65,7 +65,7 @@ function handleMarkers(data, map) {
         var userType = data.users[i].usertype;
         var telephone = data.users[i].phonenum;
         var lastname = data.users[i].epitheto;
-        var marker1 = new L.Marker([data.users[i].Latitude, data.users[i].Longitude], { icon: customIcon2 }).addTo(map);
+        var marker1 = new L.Marker([data.users[i].Latitude, data.users[i].Longitude], {draggable: true, icon: customIcon2 }).addTo(map);
         var content1 = "<h2>" + name + "</h2>" + "<h2>" + lastname + "</h2>" + "<p>" + userType + "</br>" + "<p>" + telephone + "</br>";
         marker1.bindPopup(content1, {
             maxWidth: '200'
@@ -74,6 +74,31 @@ function handleMarkers(data, map) {
         saviorsLayerGroup.addLayer(marker1);
     
     };
+    for (var i = 0; i < data.base.length; i++) {
+        var name = data.base[i].onoma;
+        var userType = data.base[i].usertype;
+        var telephone = data.base[i].phonenum;
+        var lastname = data.base[i].epitheto;
+        var marker2 = new L.Marker([data.base[i].Latitude, data.base[i].Longitude], { icon: customIcon3 }).addTo(map);
+        var content2 = "<h2>" + name + "</h2>" + "<h2>" + lastname + "</h2>" + "<p>" + userType + "</br>" + "<p>" + telephone + "</br>" +"<button id='delivery'>Παράδωση</button>" ;
+        marker2.bindPopup(content2, {
+            maxWidth: '200'
+        });
+        marker2.addTo(map);
+        var kuklos2 = L.circle(marker2.getLatLng(), {
+            color: 'red',
+            radius: 100
+        }).addTo(map);
+        baseLayersGroup.addLayer(marker2);
+        marker2.on('popupopen', function() {
+            var btn = document.getElementById('delivery');
+            btn.addEventListener('click', function() {
+                if (inrange(marker1, marker2)) {
+                    alert('Παράδωση Επιτυχής');
+                }
+            });
+        });
+    }
     var request_markers = [];
     for (var i = 0; i < data.requests.length; i++) {
         var name = data.requests[i].onoma;
@@ -99,7 +124,8 @@ function handleMarkers(data, map) {
         + "<p>Time: " + time + "</br>" 
         + "<p>Product Name: " + product_name + "</br>" 
         + "<p>Username Vehicle: " + username_veh + "</br>" 
-        + "<p>Accept Date: " + accept_date + "</br>";        
+        + "<p>Accept Date: " + accept_date + "</br>"
+        + "<button id='delivery'>Παράδωση</button>";        
         marker4.bindPopup(content4, {
             maxWidth: '200'
         });
@@ -109,6 +135,14 @@ function handleMarkers(data, map) {
             radius: 50
         }).addTo(map);
         requestLayerGroup.addLayer(marker4);
+        marker4.on('popupopen', function() {
+            var btn = document.getElementById('delivery');
+            btn.addEventListener('click', function() {
+                if (inrange(marker1, marker4)) {
+                    alert('Παράδωση Επιτυχής');
+                }
+            });
+        });
     };
     var offer_markers = [];
     for (var i = 0; i < data.offers.length; i++) {
@@ -135,7 +169,8 @@ function handleMarkers(data, map) {
         + "<p>Time: " + time + "</br>"
         + "<p>Product Name: " + product_name + "</br>"
         + "<p>Username Vehicle: " + username_veh + "</br>"
-        + "<p>Accept Date: " + accept_date + "</br>";
+        + "<p>Accept Date: " + accept_date + "</br>"
+        + "<button id='extract'> Παραλαβή </button>";
         marker5.bindPopup(content5, {
             maxWidth: '200'
         });
@@ -145,7 +180,31 @@ function handleMarkers(data, map) {
             radius: 50
         }).addTo(map);
         offerLayerGroup.addLayer(marker5);
+        marker5.on('popupopen', function() {
+            var btn = document.getElementById('extract');
+            btn.addEventListener('click', function() {
+                if(inrange(marker1, marker5)){
+                    alert('Παραλαβή Επιτυχής');
+                }
+            });
+        });
     };
+    
+    //Emfanisi tou confirmation box
+    prev_coordinates = marker1.getLatLng();
+    marker1.on('moveend', function () {
+        document.getElementById('confirmationModal').style.display = 'block';
+    });
+    document.getElementById('confirmMove').addEventListener('click', function () {
+        make_ajax_post(marker1);
+        prev_coordinates = marker1.getLatLng();
+        document.getElementById('confirmationModal').style.display = 'none';
+    });
+    //Diaxeirisi koumpioy cancel
+    document.getElementById('cancelMove').addEventListener('click', function () {
+        document.getElementById('confirmationModal').style.display = 'none';
+        marker1.setLatLng( prev_coordinates);
+    });
     //Dimiourgia pop up
     var popup = L.popup();
     function onMapClick(e) {

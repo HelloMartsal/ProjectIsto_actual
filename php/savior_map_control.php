@@ -16,15 +16,22 @@ function pull_users(object $conn){
     return $users;
 }
 
+function pull_base(object $conn){
+    $base = get_base($conn);
+    return $base;
+}
+
 function get_all_data(object $conn){
     $offersData = pull_offers($conn);
     $requestsData = pull_requests($conn);
     $usersData = pull_users($conn);
+    $baseData = pull_base($conn);
 
     $allData = [
         'offers' => $offersData,
         'requests' => $requestsData,
-        'users' => $usersData
+        'users' => $usersData,
+        'base' => $baseData
     ];
 
     return $allData;
