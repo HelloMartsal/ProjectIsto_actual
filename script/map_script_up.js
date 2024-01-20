@@ -32,6 +32,8 @@ function handleMarkers(data, map) {
     var saviorsLayerGroup = L.layerGroup().addTo(map);
     var citizensLayerGroup = L.layerGroup().addTo(map);
     var baseLayersGroup = L.layerGroup().addTo(map);
+    var requestLayerGroup = L.layerGroup().addTo(map);
+    var offerLayerGroup = L.layerGroup().addTo(map);
 
     var customIcon1 = L.icon({
         iconUrl: '../assets/my_icon_map.png',
@@ -53,13 +55,28 @@ function handleMarkers(data, map) {
         iconAnchor: [16, 32],
         popupAnchor: [0, -32]
     });
-    for (var i = 0; i < data.length; i++) {
-        var name = data[i].onoma;
-            var userType = data[i].usertype;
-            var telephone = data[i].phonenum;
-            var lastname = data[i].epitheto;
+
+    var customIcon4 = L.icon({
+        iconUrl: '../assets/icons8-request-48.png',
+        iconSize: [35, 35],
+        iconAnchor: [16, 32],
+        popupAnchor: [0, -32]
+    });
+    var customIcon5 = L.icon({
+        iconUrl: '../assets/icons8-donation-64.png',
+        iconSize: [35, 35],
+        iconAnchor: [16, 32],
+        popupAnchor: [0, -32]
+    });
+    var test = data.users.length;
+    console.log(test);
+    for (var i = 0; i < data.users.length; i++) {
+            var name = data.users[i].onoma;
+            var userType = data.users[i].usertype;
+            var telephone = data.users[i].phonenum;
+            var lastname = data.users[i].epitheto;
             if (userType === "savior") {
-                var marker1 = new L.Marker([data[i].Latitude, data[i].Longitude], { icon: customIcon2 }).addTo(map);
+                var marker1 = new L.Marker([data.users[i].Latitude, data.users[i].Longitude], { icon: customIcon2 }).addTo(map);
                 var content1 = "<h2>" + name + "</h2>" + "<h2>" + lastname + "</h2>" + "<p>" + userType + "</br>" + "<p>" + telephone + "</br>";
                 marker1.bindPopup(content1, {
                     maxWidth: '200'
@@ -67,7 +84,7 @@ function handleMarkers(data, map) {
                 marker1.addTo(map);
                 saviorsLayerGroup.addLayer(marker1);
             } else if (userType === "citizen") {
-                var marker2 = new L.Marker([data[i].Latitude, data[i].Longitude], { icon: customIcon1 }).addTo(map);
+                var marker2 = new L.Marker([data.users[i].Latitude, data.users[i].Longitude], { icon: customIcon1 }).addTo(map);
                 var content2 = "<h2>" + name + "</h2>" + "<h2>" + lastname + "</h2>" + "<p>" + userType + "</br>" + "<p>" + telephone + "</br>";
                 marker2.bindPopup(content2, {
                     maxWidth: '200'
@@ -79,8 +96,8 @@ function handleMarkers(data, map) {
                 }).addTo(map);
                 citizensLayerGroup.addLayer(marker2);
             }else if(userType === "admin" && name === "base"){
-                var marker =new L.marker([data[i].Latitude,data[i].Longitude], { draggable: true, icon: customIcon3 }).addTo(map);
-                var kuklos =new L.circle([data[i].Latitude,data[i].Longitude], {
+                var marker =new L.marker([data.users[i].Latitude,data.users[i].Longitude], { draggable: true, icon: customIcon3 }).addTo(map);
+                var kuklos =new L.circle([data.users[i].Latitude,data.users[i].Longitude], {
                     draggable: true,
                     color: 'red',
                     radius: 100
@@ -91,6 +108,69 @@ function handleMarkers(data, map) {
             }
     
     };
+    for (var i = 0; i < data.requests.length; i++) {
+        var name = data.requests[i].onoma;
+        var userType = data.requests[i].usertype;
+        var telephone = data.requests[i].phonenum;
+        var lastname = data.requests[i].epitheto;
+        var people = data.requests[i].people;
+        var time = data.requests[i].time;
+        var product_name = data.requests[i].product_name;
+        var username_veh = data.requests[i].username_veh;
+        var accept_date = data.requests[i].accept_date;
+        var Latitude = data.requests[i].Latitude;
+        var Longitude = data.requests[i].Longitude;
+        var marker4 = new L.Marker([Latitude, Longitude], { icon: customIcon4 }).addTo(map);
+        var content4 = "<h2>Name: " + name + "</h2>" 
+        + "<h2>Last Name: " + lastname + "</h2>" 
+        + "<p>Telephone: " + telephone + "</br>" 
+        + "<p>People: " + people + "</br>" 
+        + "<p>Time: " + time + "</br>" 
+        + "<p>Product Name: " + product_name + "</br>" 
+        + "<p>Username Vehicle: " + username_veh + "</br>" 
+        + "<p>Accept Date: " + accept_date + "</br>";        
+        marker4.bindPopup(content4, {
+            maxWidth: '200'
+        });
+        marker4.addTo(map);
+        var kuklos4 = L.circle(marker4.getLatLng(), {
+            color: 'red',
+            radius: 50
+        }).addTo(map);
+        requestLayerGroup.addLayer(marker4);
+    };
+    for (var i = 0; i < data.offers.length; i++) {
+        var name = data.offers[i].onoma;
+        var userType = data.offers[i].usertype;
+        var telephone = data.offers[i].phonenum;
+        var lastname = data.offers[i].epitheto;
+        var quantity = data.offers[i].quant;
+        var time = data.offers[i].time;
+        var product_name = data.offers[i].product_name;
+        var username_veh = data.offers[i].username_veh;
+        var accept_date = data.offers[i].accept_date;
+        var Latitude = data.offers[i].Latitude;
+        var Longitude = data.offers[i].Longitude;
+        var marker5 = new L.Marker([Latitude, Longitude], { icon: customIcon5 }).addTo(map);
+        var content5 = "<h2>Name: " + name + "</h2>"
+        + "<h2>Last Name: " + lastname + "</h2>"
+        + "<p>Telephone: " + telephone + "</br>"
+        + "<p>Quantity: " + quantity + "</br>"
+        + "<p>Time: " + time + "</br>"
+        + "<p>Product Name: " + product_name + "</br>"
+        + "<p>Username Vehicle: " + username_veh + "</br>"
+        + "<p>Accept Date: " + accept_date + "</br>";
+        marker5.bindPopup(content5, {
+            maxWidth: '200'
+        });
+        marker5.addTo(map);
+        var kuklos5 = L.circle(marker5.getLatLng(), {
+            color: 'red',
+            radius: 50
+        }).addTo(map);
+        offerLayerGroup.addLayer(marker5);
+    };
+
     var prev_coordinates = marker.getLatLng();
     marker.on('drag', function (event) {
         kuklos.setLatLng(event.target.getLatLng());
@@ -153,6 +233,7 @@ function fetchDataAndHandleMarkers(map) {
         url: '../php/map.php',
         dataType: 'json',
         success: function (data) {
+            console.log(data);
             handleMarkers(data,map);
         },
         error: function (error) {

@@ -1,179 +1,198 @@
-{
-    "code": 1,
-    "message": "Retrieved successfully",
-    "items": [
-        {
-            "id": "16",
-            "name": "Water",
-            "category": "6",
-            "details": [
-                {
-                    "detail_name": "volume",
-                    "detail_value": "1.5l"
-                },
-                {
-                    "detail_name": "pack size",
-                    "detail_value": "6"
-                }
-            ]
-        },
-        {
-            "id": "17",
-            "name": "Orange juice",
-            "category": "6",
-            "details": [
-                {
-                    "detail_name": "volume",
-                    "detail_value": "250ml"
-                },
-                {
-                    "detail_name": "pack size",
-                    "detail_value": "12"
-                }
-            ]
-        },
-        {
-            "id": "153",
-            "name": "Test Item",
-            "category": "11",
-            "details": [
-                {
-                    "detail_name": "volume",
-                    "detail_value": "200g"
-                },
-                {
-                    "detail_name": "",
-                    "detail_value": ""
-                }
-            ]
-        },
-        {
-            "id": "154",
-            "name": "Painkillers",
-            "category": "35",
-            "details": [
-                {
-                    "detail_name": "Potency",
-                    "detail_value": "High"
-                }
-            ]
-        },
-        {
-            "id": "155",
-            "name": "Tampons",
-            "category": "16",
-            "details": [
-                {
-                    "detail_name": "",
-                    "detail_value": ""
-                }
-            ]
-        }
-    ],
-"categories": [
-        {
-            "id": "10",
-            "category_name": ""
-        },
-        {
-            "id": "13",
-            "category_name": "-----"
-        },
-        {
-            "id": "9",
-            "category_name": "2d hacker"
-        },
-        {
-            "id": "29",
-            "category_name": "Animal Food"
-        },
-        {
-            "id": "25",
-            "category_name": "Baby Essentials"
-        },
-        {
-            "id": "6",
-            "category_name": "Beverages"
-        },
-        {
-            "id": "22",
-            "category_name": "Cleaning Supplies"
-        },
-        {
-            "id": "33",
-            "category_name": "Cleaning Supplies."
-        },
-        {
-            "id": "7",
-            "category_name": "Clothing"
-        },
-        {
-            "id": "28",
-            "category_name": "Cold weather"
-        },
-        {
-            "id": "27",
-            "category_name": "Electronic Devices"
-        },
-        {
-            "id": "30",
-            "category_name": "Financial support"
-        },
-        {
-            "id": "35",
-            "category_name": "First Aid "
-        },
-        {
-            "id": "14",
-            "category_name": "Flood"
-        },
-        {
-            "id": "5",
-            "category_name": "Food"
-        },
-        {
-            "id": "8",
-            "category_name": "Hacker of class"
-        },
-        {
-            "id": "34",
-            "category_name": "Hot Weather"
-        },
-        {
-            "id": "26",
-            "category_name": "Insect Repellents"
-        },
-        {
-            "id": "24",
-            "category_name": "Kitchen Supplies"
-        },
-        {
-            "id": "16",
-            "category_name": "Medical Supplies"
-        },
-        {
-            "id": "15",
-            "category_name": "new cat"
-        },
-        {
-            "id": "21",
-            "category_name": "Personal Hygiene "
-        },
-        {
-            "id": "19",
-            "category_name": "Shoes"
-        },
-        {
-            "id": "11",
-            "category_name": "Test"
-        },
-        {
-            "id": "39",
-            "category_name": "Test_0"
-        },
-        {
-            "id": "23",
-            "category_name": "Tools"
-        }
-    ]
-}
+Offers:array(2) {
+    [0]=>
+    array(15) {
+      ["id_off"]=>
+      int(4)
+      ["product_id"]=>
+      int(16)
+      ["quant"]=>
+      string(2) "15"
+      ["time"]=>
+      string(10) "2024-01-18"
+      ["user"]=>
+      int(1)
+      ["savior_id"]=>
+      int(3)
+      ["accept_date"]=>
+      NULL
+      ["onoma"]=>
+      string(6) "Marios"
+      ["epitheto"]=>
+      string(9) "Tsaltakis"
+      ["phonenum"]=>
+      string(10) "6971634975"
+      ["usertype"]=>
+      string(7) "citizen"
+      ["Latitude"]=>
+      float(38.2454)
+      ["Longitude"]=>
+      float(21.7343)
+      ["product_name"]=>
+      string(5) "Water"
+      ["username_veh"]=>
+      string(4) "test"
+    }
+    [1]=>
+    array(15) {
+      ["id_off"]=>
+      int(5)
+      ["product_id"]=>
+      int(16)
+      ["quant"]=>
+      string(5) "12341"
+      ["time"]=>
+      string(10) "2024-01-16"
+      ["user"]=>
+      int(2)
+      ["savior_id"]=>
+      int(3)
+      ["accept_date"]=>
+      NULL
+      ["onoma"]=>
+      string(4) "base"
+      ["epitheto"]=>
+      string(9) "mparoutis"
+      ["phonenum"]=>
+      string(10) "6971634974"
+      ["usertype"]=>
+      string(5) "admin"
+      ["Latitude"]=>
+      float(38.2501)
+      ["Longitude"]=>
+      float(21.7357)
+      ["product_name"]=>
+      string(5) "Water"
+      ["username_veh"]=>
+      string(4) "test"
+    }
+  }
+  Requests:array(2) {
+    [0]=>
+    array(15) {
+      ["id_req"]=>
+      int(1)
+      ["product_id"]=>
+      int(16)
+      ["people"]=>
+      int(1142341)
+      ["time"]=>
+      string(10) "2024-01-19"
+      ["user"]=>
+      int(1)
+      ["savior_id"]=>
+      int(3)
+      ["accept_date"]=>
+      NULL
+      ["onoma"]=>
+      string(6) "Marios"
+      ["epitheto"]=>
+      string(9) "Tsaltakis"
+      ["phonenum"]=>
+      string(10) "6971634975"
+      ["usertype"]=>
+      string(7) "citizen"
+      ["Latitude"]=>
+      float(38.2454)
+      ["Longitude"]=>
+      float(21.7343)
+      ["product_name"]=>
+      string(5) "Water"
+      ["username_veh"]=>
+      string(4) "test"
+    }
+    [1]=>
+    array(15) {
+      ["id_req"]=>
+      int(2)
+      ["product_id"]=>
+      int(16)
+      ["people"]=>
+      int(123412)
+      ["time"]=>
+      string(10) "2024-01-27"
+      ["user"]=>
+      int(2)
+      ["savior_id"]=>
+      int(3)
+      ["accept_date"]=>
+      NULL
+      ["onoma"]=>
+      string(4) "base"
+      ["epitheto"]=>
+      string(9) "mparoutis"
+      ["phonenum"]=>
+      string(10) "6971634974"
+      ["usertype"]=>
+      string(5) "admin"
+      ["Latitude"]=>
+      float(38.2501)
+      ["Longitude"]=>
+      float(21.7357)
+      ["product_name"]=>
+      string(5) "Water"
+      ["username_veh"]=>
+      string(4) "test"
+    }
+  }
+  Users:array(4) {
+    [0]=>
+    array(6) {
+      ["onoma"]=>
+      string(4) "base"
+      ["epitheto"]=>
+      string(9) "mparoutis"
+      ["phonenum"]=>
+      string(10) "6971634974"
+      ["usertype"]=>
+      string(5) "admin"
+      ["Latitude"]=>
+      float(38.2501)
+      ["Longitude"]=>
+      float(21.7357)
+    }
+    [1]=>
+    array(6) {
+      ["onoma"]=>
+      string(12) "konstantinos"
+      ["epitheto"]=>
+      string(12) "basiladiotis"
+      ["phonenum"]=>
+      string(10) "6971634976"
+      ["usertype"]=>
+      string(6) "savior"
+      ["Latitude"]=>
+      float(38.2473)
+      ["Longitude"]=>
+      float(21.7374)
+    }
+    [2]=>
+    array(6) {
+      ["onoma"]=>
+      string(10) "Alexandros"
+      ["epitheto"]=>
+      string(10) "Tsakiridis"
+      ["phonenum"]=>
+      string(10) "2345325234"
+      ["usertype"]=>
+      string(5) "admin"
+      ["Latitude"]=>
+      float(38.2501)
+      ["Longitude"]=>
+      float(21.7357)
+    }
+    [3]=>
+    array(6) {
+      ["onoma"]=>
+      string(6) "marios"
+      ["epitheto"]=>
+      string(5) "asdaf"
+      ["phonenum"]=>
+      string(10) "3452345254"
+      ["usertype"]=>
+      string(6) "savior"
+      ["Latitude"]=>
+      float(38.2451)
+      ["Longitude"]=>
+      float(21.7343)
+    }
+  }

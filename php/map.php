@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] === "GET") {
         require_once 'map_view.php'; 
         require_once 'map_control.php';
         require_once 'config_sess.php';
-        $results = user_data($conn); 
+        $results = get_all_data($conn); 
         send_data($results);
         $conn = null;
         $check = null;

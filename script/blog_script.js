@@ -66,8 +66,8 @@ document.getElementById('categories').addEventListener('change', function() {
             if(this.checked) {
                 selectedItems.push(id);
             } else {
-                var index = selectedItems.indexOf(id); // Find the index of the id in the selectedItems array
-                if(index !== -1) selectedItems.splice(index, 1); // Remove the id from the selectedItems array if the checkbox is unchecked
+                var index = selectedItems.indexOf(id);
+                if(index !== -1) selectedItems.splice(index, 1);
             }
         });
     });
@@ -81,9 +81,6 @@ function submitForm() {
     var title = $('#title').val();
     var content = $('#content').val();
     var items = JSON.stringify(selectedItems);
-    console.log(items);
-    console.log(title);
-    console.log(content);
 
     $.ajax({
         type: 'POST',
