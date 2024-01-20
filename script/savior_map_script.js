@@ -93,7 +93,7 @@ function handleMarkers(data, map) {
         marker2.on('popupopen', function() {
             var btn = document.getElementById('delivery');
             btn.addEventListener('click', function() {
-                if (inrangeToBase(marker1, marker2)) {
+                if (inrangeToBase(marker1, marker2,100)) {
                     alert('Παράδωση Επιτυχής');
                 }
             });
@@ -138,7 +138,7 @@ function handleMarkers(data, map) {
         marker4.on('popupopen', function() {
             var btn = document.getElementById('delivery');
             btn.addEventListener('click', function() {
-                if (inrange(marker1, marker4)) {
+                if (inrange(marker1, marker4,50)) {
                     alert('Παράδωση Επιτυχής');
                 }
             });
@@ -183,7 +183,7 @@ function handleMarkers(data, map) {
         marker5.on('popupopen', function() {
             var btn = document.getElementById('extract');
             btn.addEventListener('click', function() {
-                if(inrange(marker1, marker5)){
+                if(inrange(marker1, marker5,50)){
                     alert('Παραλαβή Επιτυχής');
                 }
             });
@@ -260,35 +260,16 @@ function fetchDataAndHandleMarkers(map) {
     });
 }
 
-function inrange(saviorMarker, otherMarker) {
+function inrange(saviorMarker, otherMarker,dist) {
     var saviorLatLng = saviorMarker.getLatLng();
     var otherLatLng = otherMarker.getLatLng();
 
     var distance = saviorLatLng.distanceTo(otherLatLng);
-    if (distance < 50) {
-        console.log(distance);
+    if (distance < dist) {
         return true;
     }
     else {
-        console.log(distance);
         return false;
     }
 
 }
-
-function inrangeToBase(saviorMarker, otherMarker) {
-    var saviorLatLng = saviorMarker.getLatLng();
-    var otherLatLng = otherMarker.getLatLng();
-
-    var distance = saviorLatLng.distanceTo(otherLatLng);
-    if (distance < 100) {
-        console.log(distance);
-        return true;
-    }
-    else {
-        console.log(distance);
-        return false;
-    }
-
-}
-
