@@ -35,7 +35,7 @@ if ($_SESSION["user_type"]!=="savior"){
     <script src="https://unpkg.com/leaflet-draggable/dist/leaflet.draggable.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="script/map_script_up.js"></script>
+    <script src="script/savior_map_script_up.js"></script>
 </body>
 <?php
 var_dump($_SESSION);
