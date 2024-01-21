@@ -107,42 +107,63 @@ function handleMarkers(data, map) {
         var lastname = data.requests[i].epitheto;
         var people = data.requests[i].people;
         var time = data.requests[i].time;
+        var savior_id = data.requests[i].savior_id;
+        console.log(savior_id);
         var product_name = data.requests[i].product_name;
         var username_veh = data.requests[i].username_veh;
         var accept_date = data.requests[i].accept_date;
         var Latitude = data.requests[i].Latitude;
         var Longitude = data.requests[i].Longitude;
-        var marker4 = new L.Marker([Latitude, Longitude], {
-             icon: customIcon4,
-            request_id : data.requests[i].id_req 
+        if (data.requests[i].savior_id != null) {
+            var marker4 = new L.Marker([Latitude, Longitude], {
+                icon: customIcon4,
+                request_id : data.requests[i].id_req 
+                }).addTo(map);
+            request_markers.push(marker4);
+            var content4 = "<h2>Name: " + name + "</h2>" 
+            + "<h2>Last Name: " + lastname + "</h2>" 
+            + "<p>Telephone: " + telephone + "</br>" 
+            + "<p>People: " + people + "</br>" 
+            + "<p>Time: " + time + "</br>" 
+            + "<p>Product Name: " + product_name + "</br>" 
+            + "<p>Username Vehicle: " + username_veh + "</br>" 
+            + "<p>Accept Date: " + accept_date + "</br>";      
+            marker4.bindPopup(content4, {
+                maxWidth: '200'
+            });
+            marker4.addTo(map);
+            requestLayerGroup.addLayer(marker4);
+        } else {
+            var marker7 = new L.Marker([Latitude, Longitude], {
+                icon: customIcon4,
+                request_id : data.requests[i].id_req 
+                }).addTo(map);
+            request_markers.push(marker7);
+            var content7 = "<h2>Name: " + name + "</h2>" 
+            + "<h2>Last Name: " + lastname + "</h2>" 
+            + "<p>Telephone: " + telephone + "</br>" 
+            + "<p>People: " + people + "</br>" 
+            + "<p>Time: " + time + "</br>" 
+            + "<p>Product Name: " + product_name + "</br>" 
+            + "<button id='delivery'>Παράδωση</button>";        
+            marker7.bindPopup(content7, {
+                maxWidth: '200'
+            });
+            marker7.addTo(map);
+            var kuklos7 = L.circle(marker7.getLatLng(), {
+                color: 'red',
+                radius: 50
             }).addTo(map);
-        request_markers.push(marker4);
-        var content4 = "<h2>Name: " + name + "</h2>" 
-        + "<h2>Last Name: " + lastname + "</h2>" 
-        + "<p>Telephone: " + telephone + "</br>" 
-        + "<p>People: " + people + "</br>" 
-        + "<p>Time: " + time + "</br>" 
-        + "<p>Product Name: " + product_name + "</br>" 
-        + "<p>Username Vehicle: " + username_veh + "</br>" 
-        + "<p>Accept Date: " + accept_date + "</br>"
-        + "<button id='delivery'>Παράδωση</button>";        
-        marker4.bindPopup(content4, {
-            maxWidth: '200'
-        });
-        marker4.addTo(map);
-        var kuklos4 = L.circle(marker4.getLatLng(), {
-            color: 'red',
-            radius: 50
-        }).addTo(map);
-        requestLayerGroup.addLayer(marker4);
-        marker4.on('popupopen', function() {
-            var btn = document.getElementById('delivery');
-            btn.addEventListener('click', function() {
-                if (inrange(marker1, this, 50)) {
-                    alert('Παράδωση Επιτυχής');
-                }
-            }.bind(this)); 
-        });
+            requestLayerGroup.addLayer(marker7);
+            marker7.on('popupopen', function() {
+                var btn = document.getElementById('delivery');
+                btn.addEventListener('click', function() {
+                    if (inrange(marker1, this, 50)) {
+                        alert('Παράδωση Επιτυχής');
+                    }
+                }.bind(this)); 
+            });
+        }
     };
     var offer_markers = [];
     for (var i = 0; i < data.offers.length; i++) {
@@ -152,42 +173,63 @@ function handleMarkers(data, map) {
         var lastname = data.offers[i].epitheto;
         var quantity = data.offers[i].quant;
         var time = data.offers[i].time;
+        var savior_id = data.offers[i].savior_id;
+        console.log(savior_id);
         var product_name = data.offers[i].product_name;
         var username_veh = data.offers[i].username_veh;
         var accept_date = data.offers[i].accept_date;
         var Latitude = data.offers[i].Latitude;
         var Longitude = data.offers[i].Longitude;
-        var marker5 = new L.Marker([Latitude, Longitude], { 
-            icon: customIcon5,
-            offer_id : data.offers[i].id_off
-        }).addTo(map);
-        offer_markers.push(marker4);
-        var content5 = "<h2>Name: " + name + "</h2>"
-        + "<h2>Last Name: " + lastname + "</h2>"
-        + "<p>Telephone: " + telephone + "</br>"
-        + "<p>Quantity: " + quantity + "</br>"
-        + "<p>Time: " + time + "</br>"
-        + "<p>Product Name: " + product_name + "</br>"
-        + "<p>Username Vehicle: " + username_veh + "</br>"
-        + "<p>Accept Date: " + accept_date + "</br>"
-        + "<button id='extract'> Παραλαβή </button>";
-        marker5.bindPopup(content5, {
-            maxWidth: '200'
-        });
-        marker5.addTo(map);
-        var kuklos5 = L.circle(marker5.getLatLng(), {
-            color: 'red',
-            radius: 50
-        }).addTo(map);
-        offerLayerGroup.addLayer(marker5);
-        marker5.on('popupopen', function() {
-            var btn = document.getElementById('extract');
-            btn.addEventListener('click', function() {
-                if(inrange(marker1, this, 50)){
-                    alert('Παραλαβή Επιτυχής');
-                }
-            }.bind(this));
-        });
+        if (data.offers[i].savior_id != null) {
+            var marker5 = new L.Marker([Latitude, Longitude], { 
+                icon: customIcon5,
+                offer_id : data.offers[i].id_off
+            }).addTo(map);
+            offer_markers.push(marker5);
+            var content5 = "<h2>Name: " + name + "</h2>"
+            + "<h2>Last Name: " + lastname + "</h2>"
+            + "<p>Telephone: " + telephone + "</br>"
+            + "<p>Quantity: " + quantity + "</br>"
+            + "<p>Time: " + time + "</br>"
+            + "<p>Product Name: " + product_name + "</br>"
+            + "<p>Username Vehicle: " + username_veh + "</br>"
+            + "<p>Accept Date: " + accept_date + "</br>";
+            marker5.bindPopup(content5, {
+                maxWidth: '200'
+            });
+            marker5.addTo(map);
+            offerLayerGroup.addLayer(marker5);
+        } else {
+            var marker6 = new L.Marker([Latitude, Longitude], { 
+                icon: customIcon5,
+                offer_id : data.offers[i].id_off
+            }).addTo(map);
+            offer_markers.push(marker6);
+            var content6 = "<h2>Name: " + name + "</h2>"
+            + "<h2>Last Name: " + lastname + "</h2>"
+            + "<p>Telephone: " + telephone + "</br>"
+            + "<p>Quantity: " + quantity + "</br>"
+            + "<p>Time: " + time + "</br>"
+            + "<p>Product Name: " + product_name + "</br>"
+            + "<button id='extract'> Παραλαβή </button>";
+            marker6.bindPopup(content6, {
+                maxWidth: '200'
+            });
+            marker6.addTo(map);
+            var kuklos6 = L.circle(marker6.getLatLng(), {
+                color: 'red',
+                radius: 50
+            }).addTo(map);
+            offerLayerGroup.addLayer(marker6);
+            marker6.on('popupopen', function() {
+                var btn = document.getElementById('extract');
+                btn.addEventListener('click', function() {
+                    if(inrange(marker1, this, 50)){
+                        alert('Παραλαβή Επιτυχής');
+                    }
+                }.bind(this));
+            });
+        }
     };
     
     //Emfanisi tou confirmation box

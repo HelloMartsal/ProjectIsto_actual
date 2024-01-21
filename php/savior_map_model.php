@@ -19,7 +19,7 @@ function get_base(object $conn) {
 }
 
 function get_offers(object $conn) {
-    $select = "SELECT * FROM offers WHERE savior_id IS NOT NULL;";
+    $select = "SELECT * FROM offers;";
     $check = $conn->prepare($select);
     $check->execute();
     $result = $check->fetchAll(PDO::FETCH_ASSOC);
@@ -44,20 +44,22 @@ function get_offers(object $conn) {
         }
     }
     foreach ($result as $key => $value) {
-        $select = "SELECT username_veh FROM vehicle WHERE id_veh = :id;";
-        $check = $conn->prepare($select);
-        $check->bindParam(':id', $value['savior_id']);
-        $check->execute();
-        $result2 = $check->fetchAll(PDO::FETCH_ASSOC);
-        foreach ($result2[0] as $column => $data) {
-            $result[$key][$column] = $data;
+        if ($value['savior_id'] != NULL){
+            $select = "SELECT username_veh FROM vehicle WHERE id_veh = :id;";
+            $check = $conn->prepare($select);
+            $check->bindParam(':id', $value['savior_id']);
+            $check->execute();
+            $result2 = $check->fetchAll(PDO::FETCH_ASSOC);
+            foreach ($result2[0] as $column => $data) {
+                $result[$key][$column] = $data;
+            }
         }
     }
     return $result;
 }
 
 function get_requests(object $conn) {
-    $select = "SELECT * FROM request WHERE savior_id IS NOT NULL;";
+    $select = "SELECT * FROM request;";
     $check = $conn->prepare($select);
     $check->execute();
     $result = $check->fetchAll(PDO::FETCH_ASSOC);
@@ -82,13 +84,15 @@ function get_requests(object $conn) {
         }
     }
     foreach ($result as $key => $value) {
-        $select = "SELECT username_veh FROM vehicle WHERE id_veh = :id;";
-        $check = $conn->prepare($select);
-        $check->bindParam(':id', $value['savior_id']);
-        $check->execute();
-        $result2 = $check->fetchAll(PDO::FETCH_ASSOC);
-        foreach ($result2[0] as $column => $data) {
-            $result[$key][$column] = $data;
+        if ($value['savior_id'] != NULL){
+            $select = "SELECT username_veh FROM vehicle WHERE id_veh = :id;";
+            $check = $conn->prepare($select);
+            $check->bindParam(':id', $value['savior_id']);
+            $check->execute();
+            $result2 = $check->fetchAll(PDO::FETCH_ASSOC);
+            foreach ($result2[0] as $column => $data) {
+                $result[$key][$column] = $data;
+            }
         }
     }
     return $result;

@@ -5,7 +5,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     
     try {
         require_once 'dbc.php';
-        $select = "UPDATE person SET Latitude = ? , Longitude = ? WHERE usertype = 'admin' ";
+        $select = "UPDATE person SET Latitude = ? , Longitude = ? WHERE usertype = 'admin' and onoma = 'base' ";
         $check = $conn->prepare($select);
     
         $check->execute([$lat,$lng]);
