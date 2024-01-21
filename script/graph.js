@@ -52,8 +52,6 @@ function filterData(data) {
         finOffArray.filter(item => item.time >= startDate && item.time <= endDate),
         finReqArray.filter(item => item.time >= startDate && item.time <= endDate)
     ];
-
-    console.log(filteredData);
     renderChart(filteredData);
 }
 

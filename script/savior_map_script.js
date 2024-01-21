@@ -80,7 +80,12 @@ function handleMarkers(data, map) {
         var telephone = data.base[i].phonenum;
         var lastname = data.base[i].epitheto;
         var marker2 = new L.Marker([data.base[i].Latitude, data.base[i].Longitude], { icon: customIcon3 }).addTo(map);
-        var content2 = "<h2>" + name + "</h2>" + "<h2>" + lastname + "</h2>" + "<p>" + userType + "</br>" + "<p>" + telephone + "</br>" +"<button id='delivery'>Παράδωση</button>" ;
+        var content2 = "<h2>" + name + "</h2>" 
+        + "<h2>" + lastname + "</h2>" 
+        + "<p>" + userType + "</br>" 
+        + "<p>" + telephone + "</br>" 
+        +"<button id='delivery'>Παράδωση</button>"
+        +"<button id='extract'>Παραλαβή</button>";
         marker2.bindPopup(content2, {
             maxWidth: '200'
         });
@@ -98,6 +103,14 @@ function handleMarkers(data, map) {
                 }
             }.bind(this));
         });
+        marker2.on('popupopen', function() {
+            var btn2 = document.getElementById('extract');
+            btn2.addEventListener('click', function() {
+                if (inrange(marker1, this, 100)) {
+                    alert('Φόρτωση Επιτυχής');
+                }
+            }.bind(this));
+        });
     }
     var request_markers = [];
     for (var i = 0; i < data.requests.length; i++) {
@@ -108,8 +121,13 @@ function handleMarkers(data, map) {
         var people = data.requests[i].people;
         var time = data.requests[i].time;
         var savior_id = data.requests[i].savior_id;
-        console.log(savior_id);
-        var product_name = data.requests[i].product_name;
+        var product_names = [];
+        var productNamesObj = data.requests[i].product_names;
+        for (var key in productNamesObj) {
+            if (productNamesObj.hasOwnProperty(key)) {
+                product_names.push(productNamesObj[key]);
+            }
+        }
         var username_veh = data.requests[i].username_veh;
         var accept_date = data.requests[i].accept_date;
         var Latitude = data.requests[i].Latitude;
@@ -124,9 +142,13 @@ function handleMarkers(data, map) {
             + "<h2>Last Name: " + lastname + "</h2>" 
             + "<p>Telephone: " + telephone + "</br>" 
             + "<p>People: " + people + "</br>" 
-            + "<p>Time: " + time + "</br>" 
-            + "<p>Product Name: " + product_name + "</br>" 
-            + "<p>Username Vehicle: " + username_veh + "</br>" 
+            + "<p>Time: " + time + "</br>"
+            + "<p>Product Name</br>"; 
+            for (var j = 0; j < product_names.length; j++) {
+                content4 += "<p>" + product_names[j] + "</p>"; 
+            }
+            
+            content4 += "<p>Username Vehicle: " + username_veh + "</br>" 
             + "<p>Accept Date: " + accept_date + "</br>";      
             marker4.bindPopup(content4, {
                 maxWidth: '200'
@@ -144,8 +166,12 @@ function handleMarkers(data, map) {
             + "<p>Telephone: " + telephone + "</br>" 
             + "<p>People: " + people + "</br>" 
             + "<p>Time: " + time + "</br>" 
-            + "<p>Product Name: " + product_name + "</br>" 
-            + "<button id='delivery'>Παράδωση</button>";        
+            + "<p>Product Name</br>"; 
+            for (var j = 0; j < product_names.length; j++) {
+                content7 += "<p>" + product_names[j] + "</p>"; 
+            }
+            
+            content7 +="<button id='delivery'>Παράδωση</button>";        
             marker7.bindPopup(content7, {
                 maxWidth: '200'
             });
@@ -159,6 +185,8 @@ function handleMarkers(data, map) {
                 var btn = document.getElementById('delivery');
                 btn.addEventListener('click', function() {
                     if (inrange(marker1, this, 50)) {
+                        make_ajax_post(marker1);
+                        accept_task(this.options.request_id, 'request');
                         alert('Παράδωση Επιτυχής');
                     }
                 }.bind(this)); 
@@ -174,8 +202,20 @@ function handleMarkers(data, map) {
         var quantity = data.offers[i].quant;
         var time = data.offers[i].time;
         var savior_id = data.offers[i].savior_id;
-        console.log(savior_id);
-        var product_name = data.offers[i].product_name;
+        var product_names = [];
+        var quantities = [];
+        var quantitiesObj = data.offers[i].quantities;
+        var productNamesObj = data.offers[i].product_names;
+        for (var key in productNamesObj) {
+            if (productNamesObj.hasOwnProperty(key)) {
+                product_names.push(productNamesObj[key]);
+            }
+        }
+        for (var key in quantitiesObj) {
+            if (quantitiesObj.hasOwnProperty(key)) {
+                quantities.push(quantitiesObj[key]);
+            }
+        }
         var username_veh = data.offers[i].username_veh;
         var accept_date = data.offers[i].accept_date;
         var Latitude = data.offers[i].Latitude;
@@ -186,14 +226,18 @@ function handleMarkers(data, map) {
                 offer_id : data.offers[i].id_off
             }).addTo(map);
             offer_markers.push(marker5);
-            var content5 = "<h2>Name: " + name + "</h2>"
-            + "<h2>Last Name: " + lastname + "</h2>"
-            + "<p>Telephone: " + telephone + "</br>"
-            + "<p>Quantity: " + quantity + "</br>"
-            + "<p>Time: " + time + "</br>"
-            + "<p>Product Name: " + product_name + "</br>"
-            + "<p>Username Vehicle: " + username_veh + "</br>"
-            + "<p>Accept Date: " + accept_date + "</br>";
+            var content5 = "<h2>Name: " + name + "</h2>" 
+            + "<h2>Last Name: " + lastname + "</h2>" 
+            + "<p>Telephone: " + telephone + "</br>" 
+            + "<p>Time: " + time + "</br>" 
+            + "<p>Product Name and Quantity: </br>"; 
+            
+            for (var j = 0; j < product_names.length; j++) {
+                content5 += "<p>" + product_names[j] + ": " + quantities[j] + "</p>"; 
+            }
+            
+            content5 += "<p>Username Vehicle: " + username_veh + "</br>" 
+            + "<p>Accept Date: " + accept_date + "</br>"; 
             marker5.bindPopup(content5, {
                 maxWidth: '200'
             });
@@ -205,13 +249,17 @@ function handleMarkers(data, map) {
                 offer_id : data.offers[i].id_off
             }).addTo(map);
             offer_markers.push(marker6);
-            var content6 = "<h2>Name: " + name + "</h2>"
-            + "<h2>Last Name: " + lastname + "</h2>"
-            + "<p>Telephone: " + telephone + "</br>"
-            + "<p>Quantity: " + quantity + "</br>"
-            + "<p>Time: " + time + "</br>"
-            + "<p>Product Name: " + product_name + "</br>"
-            + "<button id='extract'> Παραλαβή </button>";
+            var content6 = "<h2>Name: " + name + "</h2>" 
+            + "<h2>Last Name: " + lastname + "</h2>" 
+            + "<p>Telephone: " + telephone + "</br>" 
+            + "<p>Time: " + time + "</br>" 
+            + "<p>Product Name and Quantity: </br>"; // start product name and quantity section
+            
+            for (var j = 0; j < product_names.length; j++) {
+                content6 += "<p>" + product_names[j] + ": " + quantities[j] + "</p>"; // add each product name and its quantity
+            }
+            
+            content6 += "<button id='extract'> Παραλαβή </button>";
             marker6.bindPopup(content6, {
                 maxWidth: '200'
             });
@@ -225,6 +273,8 @@ function handleMarkers(data, map) {
                 var btn = document.getElementById('extract');
                 btn.addEventListener('click', function() {
                     if(inrange(marker1, this, 50)){
+                        make_ajax_post(marker1);
+                        accept_task(this.options.offer_id, 'offer');
                         alert('Παραλαβή Επιτυχής');
                     }
                 }.bind(this));
@@ -315,3 +365,24 @@ function inrange(saviorMarker, otherMarker,dist) {
     }
 
 }
+
+function accept_task(task_id,type){
+    $.ajax({
+        type: 'POST',
+        url: '../php/savior_accept_task.php',
+        data: {
+            task_id: task_id,
+            type: type
+        },
+        success: function (response) {
+            if(response){
+                alert(response)
+            }
+        },
+        error: function (error) {
+            alert('Error!\nFailed to send coordinates.');
+        }
+    });
+}
+
+//TODO MAKE A FUNCITON THAT LAODS AND OFFLOADS THE BASE
