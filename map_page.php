@@ -32,7 +32,6 @@ if ($_SESSION["user_type"]!=="admin"){
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
             integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
             crossorigin=""></script>
-    <script src="https://unpkg.com/leaflet-draggable/dist/leaflet.draggable.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="script/map_script_up.js"></script>

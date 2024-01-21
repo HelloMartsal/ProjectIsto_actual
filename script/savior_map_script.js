@@ -95,6 +95,7 @@ function handleMarkers(data, map) {
             radius: 100
         }).addTo(map);
         baseLayersGroup.addLayer(marker2);
+        baseLayersGroup.addLayer(kuklos2);
         marker2.on('popupopen', function() {
             var btn = document.getElementById('delivery');
             btn.addEventListener('click', function() {
@@ -181,6 +182,7 @@ function handleMarkers(data, map) {
                 radius: 50
             }).addTo(map);
             requestLayerGroup.addLayer(marker7);
+            requestLayerGroup.addLayer(kuklos7);
             marker7.on('popupopen', function() {
                 var btn = document.getElementById('delivery');
                 btn.addEventListener('click', function() {
@@ -269,6 +271,7 @@ function handleMarkers(data, map) {
                 radius: 50
             }).addTo(map);
             offerLayerGroup.addLayer(marker6);
+            offerLayerGroup.addLayer(kuklos6);
             marker6.on('popupopen', function() {
                 var btn = document.getElementById('extract');
                 btn.addEventListener('click', function() {
