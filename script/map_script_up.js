@@ -60,6 +60,7 @@ function handleMarkers(data, map) {
         iconAnchor: [16, 32],
         popupAnchor: [0, -32]
     });
+    // TODO PULL THE TASKS OF EACH SAVIOR
     for (var i = 0; i < data.users.length; i++) {
         var name = data.users[i].onoma;
         var userType = data.users[i].usertype;
@@ -152,9 +153,7 @@ function handleMarkers(data, map) {
             + "<p>Product Name</br>"; 
             for (var j = 0; j < product_names.length; j++) {
                 content7 += "<p>" + product_names[j] + "</p>"; 
-            }
-            
-            content7 +="<button id='delivery'>Παράδωση</button>";        
+            }      
             marker7.bindPopup(content7, {
                 maxWidth: '200'
             });
@@ -171,7 +170,7 @@ function handleMarkers(data, map) {
                     if (inrange(marker1, this, 50)) {
                         make_ajax_post(marker1);
                         accept_task(this.options.request_id, 'request');
-                        alert('Παράδωση Επιτυχής');
+                        alert('Παράδοση Επιτυχής');
                     }
                 }.bind(this)); 
             });
@@ -243,7 +242,6 @@ function handleMarkers(data, map) {
                 content6 += "<p>" + product_names[j] + ": " + quantities[j] + "</p>"; // add each product name and its quantity
             }
             
-            content6 += "<button id='extract'> Παραλαβή </button>";
             marker6.bindPopup(content6, {
                 maxWidth: '200'
             });

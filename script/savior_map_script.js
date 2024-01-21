@@ -84,7 +84,7 @@ function handleMarkers(data, map) {
         + "<h2>" + lastname + "</h2>" 
         + "<p>" + userType + "</br>" 
         + "<p>" + telephone + "</br>" 
-        +"<button id='delivery'>Παράδωση</button>"
+        +"<button id='delivery'>Παράδοση</button>"
         +"<button id='extract'>Παραλαβή</button>";
         marker2.bindPopup(content2, {
             maxWidth: '200'
@@ -100,7 +100,7 @@ function handleMarkers(data, map) {
             var btn = document.getElementById('delivery');
             btn.addEventListener('click', function() {
                 if (inrange(marker1, this, 100)) {
-                    alert('Παράδωση Επιτυχής');
+                    alert('Παράδοση Επιτυχής');
                 }
             }.bind(this));
         });
@@ -172,7 +172,7 @@ function handleMarkers(data, map) {
                 content7 += "<p>" + product_names[j] + "</p>"; 
             }
             
-            content7 +="<button id='delivery'>Παράδωση</button>";        
+            content7 +="<button id='delivery'>Παράδοση</button>";        
             marker7.bindPopup(content7, {
                 maxWidth: '200'
             });
@@ -189,7 +189,7 @@ function handleMarkers(data, map) {
                     if (inrange(marker1, this, 50)) {
                         make_ajax_post(marker1);
                         accept_task(this.options.request_id, 'request');
-                        alert('Παράδωση Επιτυχής');
+                        alert('Παράδοση Επιτυχής');
                     }
                 }.bind(this)); 
             });
