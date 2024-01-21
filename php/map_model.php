@@ -1,11 +1,31 @@
 <?php
 declare(strict_types=1);
 
+use LDAP\Result;
+
 function get_user(object $conn) {
-    $select = "SELECT onoma,epitheto,phonenum,usertype,Latitude,Longitude FROM person WHERE usertype = 'savior';";
+    $select = "SELECT onoma,epitheto,phonenum,usertype,Latitude,Longitude,user_id FROM person WHERE usertype = 'savior'";
     $check = $conn->prepare($select);
     $check->execute();
     $result = $check->fetchAll(PDO::FETCH_ASSOC);
+    foreach ($result as $key => $value) {
+        $offers=[];
+        $id = $value['user_id'];
+        $result2 = get_savior_offers($conn,$id);
+        foreach ($result2 as $column => $data) {
+            $offers['offer' . ($column + 1)] = $data;
+        }
+        $result[$key]['offers'] = $offers;
+    }
+    foreach ($result as $key => $value) {
+        $requests=[];
+        $id = $value['user_id'];
+        $result2 = get_savior_requests($conn,$id);
+        foreach ($result2 as $column => $data) {
+            $requests['request' . ($column + 1)] = $data;
+        }
+        $result[$key]['requests'] = $requests;
+    }
     return $result;
 }
 
@@ -119,6 +139,46 @@ function get_requests(object $conn) {
     }
     return $result;
 }
+
+function get_savior_offers(object $conn,int $user_id){
+    $select = "SELECT user,id_off FROM offers WHERE savior_id = :id;";
+    $check = $conn->prepare($select);
+    $check->bindParam(':id', $user_id);
+    $check->execute();
+    $result = $check->fetchAll(PDO::FETCH_ASSOC);
+    foreach ($result as $key => $value) {
+        $select = "SELECT onoma,epitheto,phonenum FROM person WHERE user_id = :id;";
+        $check = $conn->prepare($select);
+        $check->bindParam(':id', $value['user']);
+        $check->execute();
+        $result2 = $check->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($result2[0] as $column => $data) {
+            $result[$key][$column] = $data;
+        }
+        $result[$key]['id_off'] = $value['id_off'];
+    }
+    return $result;
+}
+function get_savior_requests(object $conn,int $user_id){
+    $select = "SELECT user,id_req FROM request WHERE savior_id = :id;";
+    $check = $conn->prepare($select);
+    $check->bindParam(':id', $user_id);
+    $check->execute();
+    $result = $check->fetchAll(PDO::FETCH_ASSOC);
+    foreach ($result as $key => $value) {
+        $select = "SELECT onoma,epitheto,phonenum FROM person WHERE user_id = :id;";
+        $check = $conn->prepare($select);
+        $check->bindParam(':id', $value['user']);
+        $check->execute();
+        $result2 = $check->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($result2[0] as $column => $data) {
+            $result[$key][$column] = $data;
+        }
+        $result[$key]['id_req'] = $value['id_req'];
+    }
+    return $result;
+}
+
 
 
 ?>

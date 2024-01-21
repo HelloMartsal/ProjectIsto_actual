@@ -1,4 +1,4 @@
-// TODO ADD THE REQUIRED DATAILS FOR SAVIOR
+
 function init() {
     var map = L.map('map').setView([38.246254, 21.735125], 15);
     var osmLink = "<a href='http://www.openstreetmap.org'>Open StreetMap</a>";
@@ -66,8 +66,62 @@ function handleMarkers(data, map) {
         var userType = data.users[i].usertype;
         var telephone = data.users[i].phonenum;
         var lastname = data.users[i].epitheto;
+        var offers = [];
+        var offersObj = data.users[i].offers;
+        for (var key in offersObj) {
+            if (offersObj.hasOwnProperty(key)) {
+                offers.push(offersObj[key]);
+            }
+        }
+        var user = [];
+        var id_off = [];
+        var onoma = [];
+        var epitheto = [];
+        var phonenum = [];
+        for (var j = 0; j < offers.length; j++) {
+            user.push(offers[j]['user']);
+            id_off.push(offers[j]['id_off']);
+            onoma.push(offers[j]['onoma']);
+            epitheto.push(offers[j]['epitheto']);
+            phonenum.push(offers[j]['phonenum']);
+        }
+
+        var request = [];
+        var requestsObj = data.users[i].requests;
+        for (var key in requestsObj) {
+            if (requestsObj.hasOwnProperty(key)) {
+                request.push(requestsObj[key]);
+            }
+        }
+        var user1 = [];
+        var id_req = [];
+        var onoma1 = [];
+        var epitheto1 = [];
+        var phonenum1 = [];
+        for (var j = 0; j < request.length; j++) {
+            user1.push(request[j]['user']);
+            id_req.push(request[j]['id_req']);
+            onoma1.push(request[j]['onoma']);
+            epitheto1.push(request[j]['epitheto']);
+            phonenum1.push(request[j]['phonenum']);
+        }
+
+
+
         var marker1 = new L.Marker([data.users[i].Latitude, data.users[i].Longitude], {icon: customIcon2 }).addTo(map);
-        var content1 = "<h2>" + name + "</h2>" + "<h2>" + lastname + "</h2>" + "<p>" + userType + "</br>" + "<p>" + telephone + "</br>";
+        var content1 = "<h2>" + name + "</h2>" 
+        + "<h2>" + lastname + "</h2>"
+        + "<p>" + telephone + "</br>" 
+        + "<p>Active Offers:</br>"
+        + "<p>Offer_ID, Name, Lastname, Telephone</br>";
+        for (var j = 0; j < offers.length; j++) {
+            content1 += "<p>"+id_off[j]+", " + onoma[j] + ", " + epitheto[j] + ", " + phonenum[j] + "</p>"; 
+        }
+        content1 += "<p>Active Requests:</br>"
+        + "<p>Request_ID, Name, Lastname, Telephone</br>";
+        for (var j = 0; j < request.length; j++) {
+            content1 += "<p>"+id_req[j]+", " + onoma1[j] + ", " + epitheto1[j] + ", " + phonenum1[j] + "</p>";
+        }
         marker1.bindPopup(content1, {
             maxWidth: '200'
         });
