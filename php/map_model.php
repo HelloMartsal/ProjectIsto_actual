@@ -1,7 +1,6 @@
 <?php
 declare(strict_types=1);
 
-use LDAP\Result;
 
 function get_user(object $conn) {
     $select = "SELECT onoma,epitheto,phonenum,usertype,Latitude,Longitude,user_id FROM person WHERE usertype = 'savior'";

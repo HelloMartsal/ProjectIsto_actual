@@ -1,26 +1,23 @@
 <?php
     require_once 'php/config_sess.php';
-    if ($_SESSION["user_type"]!=="admin"){
+    if ($_SESSION["user_type"]!=="citizen"){
         header("Location:../login_page.php");
     }
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Δημιουργία Ανακοινώσεων</title>
+    <title>Donations</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/dark.css">
 </head>
 <body>
 <div class="container">
-        <h1>Create a Blog Post</h1>
+        <h1>Δημιουργία Προσφοράς</h1>
         <form id="blogForm">
-            <label for="title">Title:</label>
-            <input type="text" id="title" name="title" required>
-
-            <label for="content">Content:</label>
-            <textarea id="content" name="content" rows="4" required></textarea>
+            <label for="quant">Ποσότητα:</label>
+            <input type="number" id="quant" name="quant" required>
 
             <label for="categories">Categories:</label>
             <select id="categories" name="categories[]" required>
@@ -28,17 +25,14 @@
             <label for="items">Items:</label>
             <div id="items">
             </div>
-
-            <button type="button" onclick="submitForm()">Submit</button>
+            <button type = "button" onclick="addItem()">Προσθήκη</button>
+            <button type="button" onclick="submitForm()">Αποστολή</button>
         </form>
-        <a href="index.php">
-                <button>Add Category or Item</button>
-        </a>
 
         <div id="result"></div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="script/blog_script.js"></script>    
+    <script src="script/donation_page.js"></script>    
 </body>
 </html>

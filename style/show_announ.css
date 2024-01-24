@@ -1,0 +1,17 @@
+.announcement {
+    border: 1px solid #ddd;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 5px;
+}
+.title {
+    font-size: 20px;
+    font-weight: bold;
+}
+.date {
+    font-size: 14px;
+    color: #888;
+}
+.content {
+    margin-top: 10px;
+}
