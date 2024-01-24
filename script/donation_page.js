@@ -45,7 +45,7 @@ $(document).ready(function () {
 var selectedItems = [];
 document.getElementById('categories').addEventListener('change', function() {
     $('#items').html('');
-    var selectedCategory = this.value; // Get the selected category
+    var selectedCategory = this.value; 
     if (this.value === ''){
         selectedCategory = "1";
     };
@@ -74,9 +74,9 @@ document.getElementById('categories').addEventListener('change', function() {
                 // Uncheck all other checkboxes
                 $('input[type="checkbox"]').not(this).prop('checked', false);
 
-                selectedItems = [id]; // Reset selectedItems to only include the current item
+                selectedItems = [id];
             } else {
-                selectedItems = []; // Reset selectedItems to an empty array
+                selectedItems = []; 
             }
         });
     });
