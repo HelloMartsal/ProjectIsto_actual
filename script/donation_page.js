@@ -1,3 +1,4 @@
+// TODO PRINT ONLY THE ITEMS AND CATEGORIES OF THE CURRENT ANNOUNCEMENT
 var urlParams = new URLSearchParams(window.location.search);
 var id_ann = urlParams.get('id_ann');
 if (id_ann && !isNaN(id_ann)) {
@@ -109,7 +110,6 @@ function addItem(){
     var selectedItem = selectedItems[0];
     if (selectedItem && quant) {
         itemQuant.push({ item: selectedItem, quant: quant });
-        console.log(itemQuant);
 
         document.getElementById('quant').value = '';
         $('#' + selectedItem).prop('checked', false);

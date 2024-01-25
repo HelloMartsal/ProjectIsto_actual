@@ -60,7 +60,7 @@ function handleMarkers(data, map) {
         iconAnchor: [16, 32],
         popupAnchor: [0, -32]
     });
-    // TODO PULL THE TASKS OF EACH SAVIOR
+    
     for (var i = 0; i < data.users.length; i++) {
         var name = data.users[i].onoma;
         var userType = data.users[i].usertype;

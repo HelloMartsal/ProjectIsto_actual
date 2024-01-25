@@ -1,4 +1,3 @@
-// TODO ADD THE REQUIRED DATAILS FOR SAVIOR
 function init() {
     var map = L.map('map').setView([38.246254, 21.735125], 15);
     var osmLink = "<a href='http://www.openstreetmap.org'>Open StreetMap</a>";
@@ -388,4 +387,4 @@ function accept_task(task_id,type){
     });
 }
 
-//TODO MAKE A FUNCITON THAT LAODS AND OFFLOADS THE BASE
+//TODO MAKE A FUNCITON THAT LOADS AND OFFLOADS THE BASE
