@@ -1,3 +1,4 @@
+// TODO FIX MULTIPLE OFFERS ON THE SAME SPOT
 function init() {
     var map = L.map('map').setView([38.246254, 21.735125], 15);
     var osmLink = "<a href='http://www.openstreetmap.org'>Open StreetMap</a>";
@@ -99,7 +100,7 @@ function handleMarkers(data, map) {
             var btn = document.getElementById('delivery');
             btn.addEventListener('click', function() {
                 if (inrange(marker1, this, 100)) {
-                    alert('Παράδοση Επιτυχής');
+                    on_off_load('offer');
                 }
             }.bind(this));
         });
@@ -387,4 +388,21 @@ function accept_task(task_id,type){
     });
 }
 
-//TODO MAKE A FUNCITON THAT LOADS AND OFFLOADS THE BASE
+function on_off_load(type){
+    $.ajax({
+        type: 'POST',
+        url: '../php/base_load.php',
+        data: {
+            type: type
+        },
+        success: function (response) {
+            if(response){
+                alert(response)
+            }
+        },
+        error: function (error) {
+            alert('Error!\nFailed to send coordinates.');
+        }
+    });
+}
+

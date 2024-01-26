@@ -4,8 +4,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $items = json_decode($items,true);
     try {
         require_once 'dbc.php';
-        require_once 'donation_store_model.php';
-        require_once 'donation_store_view.php';
+        require_once 'donation_store_model.php';      
         require_once 'donation_store_control.php';
         require_once 'config_sess.php';
         $user_id = $_SESSION["user_id"];
