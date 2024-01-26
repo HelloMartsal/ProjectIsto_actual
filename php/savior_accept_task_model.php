@@ -31,4 +31,12 @@ function check_user_offers_requests(object $conn, int $user_id): bool {
 
     return $result['count'] < 4;
 }
+//TODO PUT STUFF HERE
+function remove_request(object $conn, int $task_id){
+
+}
+
+function move_request(object $conn, int $task_id){
+
+}
 ?>

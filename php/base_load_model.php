@@ -58,7 +58,6 @@ function move_offer(object $conn, int $user_id){
         $result[$row]["items"] = json_encode($items);
     }
     $time = date("Y-m-d");
-    var_dump($result);
     foreach($result as $row=>$value){
         $select = "INSERT INTO finished_offers(itemquant,id_user,id_savior,time,accept_time,finish_time) VALUES (:items,:id_user,:id_savior,:time,:accept_time,:finish_time)";
         $check = $conn->prepare($select);
@@ -71,5 +70,13 @@ function move_offer(object $conn, int $user_id){
         $check->execute();
     }
 
+}
+
+function get_items(object $conn){
+    $select = "SELECT id_item,quant FROM base";
+    $check = $conn->prepare($select);
+    $check->execute();
+    $result = $check->fetchAll(PDO::FETCH_ASSOC);
+    return $result;
 }
 ?>

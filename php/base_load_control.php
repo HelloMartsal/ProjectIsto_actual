@@ -14,4 +14,13 @@ function decode_to_base($conn){
     $result = pull_offers($conn);
     update_base($conn, $result);
 }
+//TODO PUT STUFF HERE
+function pull_items(object $conn){
+   $result = get_items($conn); 
+}
+
+function encode_to_request($conn){
+
+}
+
 ?>

@@ -14,8 +14,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         else if($type == 'request'){
            accept_request($conn,$task_id,$user_id); 
+        }else if ($type == 'delivery'){
+            //TODO PUT STUFF HERE
+            deliver_request($conn,$task_id);
         }
-
         if (isset($_SESSION['error'])) {
             echo $_SESSION['error'];
             unset($_SESSION['error']);

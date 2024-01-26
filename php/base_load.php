@@ -7,7 +7,14 @@ if($_SERVER["REQUEST_METHOD"]==="POST"){
         require_once 'base_load_model.php';
         require_once 'base_load_control.php';
         require_once 'config_sess.php';
-        decode_to_base($conn);
+        if ($type == "offer"){
+            decode_to_base($conn);
+        } else if($type =="request"){
+            encode_to_request($conn);
+        } else {
+            echo "Error: type not found";
+        }
+        
         
         $conn=null;
         $check = null;

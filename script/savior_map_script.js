@@ -172,7 +172,8 @@ function handleMarkers(data, map) {
                 content7 += "<p>" + product_names[j] + "</p>"; 
             }
             
-            content7 +="<button id='delivery'>Παράδοση</button>";        
+            content7 +="<button id='accept'>Ανάληψη Task</button>";
+            content7 +="<button id='delivery'>Παράδοση</button>";         
             marker7.bindPopup(content7, {
                 maxWidth: '200'
             });
@@ -184,12 +185,20 @@ function handleMarkers(data, map) {
             requestLayerGroup.addLayer(marker7);
             requestLayerGroup.addLayer(kuklos7);
             marker7.on('popupopen', function() {
-                var btn = document.getElementById('delivery');
+                var btn = document.getElementById('accept');
                 btn.addEventListener('click', function() {
                     if (inrange(marker1, this, 50)) {
                         make_ajax_post(marker1);
                         accept_task(this.options.request_id, 'request');
-                        alert('Παράδοση Επιτυχής');
+                        alert('Ανάληψη Επιτυχής');
+                    }
+                }.bind(this)); 
+            });
+            marker7.on('popupopen', function() {
+                var btn2 = document.getElementById('delivery');
+                btn2.addEventListener('click', function() {
+                    if (inrange(marker1, this, 50)) {
+                        accept_task(this.options.request_id, 'delivery');
                     }
                 }.bind(this)); 
             });
