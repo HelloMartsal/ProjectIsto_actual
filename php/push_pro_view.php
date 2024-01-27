@@ -14,9 +14,7 @@ function show_new_item(){
     }
 
 }
-if (isset($_GET['show_new_item'])) {
-    show_new_item();
-}
+
 function print_item_exists_error(){
     $name = $_SESSION['name'];
     echo "<p>Το προϊόν " . $name . " υπάρχει ήδη στη βάση δεδομένων</p>";
