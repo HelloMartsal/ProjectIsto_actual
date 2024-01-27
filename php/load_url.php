@@ -19,8 +19,12 @@ $url = $_POST["url"];
             header("Location:../add_cat_item.php");
             die();
         }
-        push_cat_url($conn,$data);
-        push_item_url($conn,$data);
+        $array = check_category($conn,$data);
+        check_item($conn,$data);
+        update_items($conn,$array,$data);
+        while(count($array)>0){
+        array_pop($array);
+        }
         $conn=null;
         $check=null;
         header("Location:../add_cat_item.php");

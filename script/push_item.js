@@ -67,17 +67,7 @@ function prepareAndSendData(event) {
         document.getElementById('detail_name_' + i).value = '';
         document.getElementById('detail_value_' + i).value = '';
     }
-    $.ajax({
-        url: '../php/push_pro_view.php?show_new_item=true',
-        type: 'GET',
-        success: function(response) {
-            var responseElement = document.getElementById('response');
-            responseElement.innerHTML = response;
-        },
-        error: function() {
-            console.error('Error calling show_new_item');
-        }
-    });
+
     return true;
 }
 
@@ -87,8 +77,9 @@ function submitForm(jsondata) {
         type: 'POST',
         data: jsondata,
         contentType: 'application/json',
-        success: function (jsonData) {
-            console.log('Success');
+        success: function (response) {
+            var responseElement = document.getElementById('response');
+            responseElement.innerHTML = response;
         },
         error: function () {
             console.error('Error fetching categories');
