@@ -31,12 +31,41 @@ function check_user_offers_requests(object $conn, int $user_id): bool {
 
     return $result['count'] < 4;
 }
-//TODO PUT STUFF HERE
 function remove_request(object $conn, int $task_id){
+    $select = "DELETE FROM request WHERE id_req = :task_id";
+    $check = $conn->prepare($select);
+    $check->bindParam(':task_id', $task_id);
+    $check->execute();
 
 }
 
 function move_request(object $conn, int $task_id){
+$select = "SELECT * FROM request WHERE id_req = :task_id";
+    $check = $conn->prepare($select);
+    $check->bindParam(':task_id', $task_id);
+    $check->execute();
+    $result = $check->fetchAll(PDO::FETCH_ASSOC);
+    foreach($result as $row=>$value){
+        $items = [];
+        $select = "SELECT id_item_l FROM req_item_link WHERE id_req_l = :id";
+        $check = $conn->prepare($select);
+        $check->bindParam(':id', $value["id_req"], PDO::PARAM_INT);
+        $check->execute();
+        $result2 = $check->fetchAll(PDO::FETCH_ASSOC);
+        foreach($result2 as $row2=>$value2){
+            $items[] = $value2;
+ 
+        }
+        $result[$row]["items"] = json_encode($items);
+    }
+    $time = date("Y-m-d");
+    foreach($result as $row=>$value){
+        $select = "INSERT INTO finished_requests(product_id,manypeople,id_user,id_savior,time,accept_time,finish_time) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $check = $conn->prepare($select);
+        $items = json_encode($value["items"]);
+        $check->execute([$items,$value["people"],$value["user"],$value["savior_id"],$value["time"],$value["accept_date"],$time]);
+    }
+
 
 }
 ?>

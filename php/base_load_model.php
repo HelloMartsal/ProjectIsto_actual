@@ -79,4 +79,35 @@ function get_items(object $conn){
     $result = $check->fetchAll(PDO::FETCH_ASSOC);
     return $result;
 }
+function get_request_by_user(object $conn,int $user_id){
+    $select = "SELECT id_req,people FROM request WHERE savior_id = :user_id";
+    $check = $conn->prepare($select);
+    $check->bindParam(':user_id', $user_id);
+    $check->execute();
+    $result = $check->fetchAll(PDO::FETCH_ASSOC);
+    foreach($result as $row=>$value){
+        $items = [];
+        $select = "SELECT id_item_l FROM req_item_link WHERE id_req_l = :id";
+        $check = $conn->prepare($select);
+        $check->bindParam(':id', $value["id_req"], PDO::PARAM_INT);
+        $check->execute();
+        $result2 = $check->fetchAll(PDO::FETCH_ASSOC);
+        foreach($result2 as $row2=>$value2){
+            $items[] = $value2;
+        }
+        $result[$row]["items"] = $items;
+    }
+    return $result;
+}
+
+function remove_items_from_base(object $conn, array $result){
+    var_dump($result);
+    foreach($result as $row=>$value){
+        $select = "UPDATE base SET quant = quant - :quant WHERE id_item = :id_item";
+        $check = $conn->prepare($select);
+        $check->bindParam(':id_item', $value["item"], PDO::PARAM_INT);
+        $check->bindParam(':quant', $value["quant"], PDO::PARAM_INT);
+        $check->execute();
+    }
+}
 ?>

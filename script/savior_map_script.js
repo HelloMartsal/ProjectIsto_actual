@@ -108,6 +108,7 @@ function handleMarkers(data, map) {
             var btn2 = document.getElementById('extract');
             btn2.addEventListener('click', function() {
                 if (inrange(marker1, this, 100)) {
+                    on_off_load('request');
                     alert('Φόρτωση Επιτυχής');
                 }
             }.bind(this));
@@ -133,7 +134,8 @@ function handleMarkers(data, map) {
         var accept_date = data.requests[i].accept_date;
         var Latitude = data.requests[i].Latitude;
         var Longitude = data.requests[i].Longitude;
-        if (data.requests[i].savior_id != null) {
+        var state = data.requests[i].state;
+        if (savior_id != null && state == "accepted") {
             var marker4 = new L.Marker([Latitude, Longitude], {
                 icon: customIcon4,
                 request_id : data.requests[i].id_req 
@@ -156,7 +158,7 @@ function handleMarkers(data, map) {
             });
             marker4.addTo(map);
             requestLayerGroup.addLayer(marker4);
-        } else {
+        } else if (savior_id == null) {
             var marker7 = new L.Marker([Latitude, Longitude], {
                 icon: customIcon4,
                 request_id : data.requests[i].id_req 
@@ -172,8 +174,7 @@ function handleMarkers(data, map) {
                 content7 += "<p>" + product_names[j] + "</p>"; 
             }
             
-            content7 +="<button id='accept'>Ανάληψη Task</button>";
-            content7 +="<button id='delivery'>Παράδοση</button>";         
+            content7 +="<button id='accept'>Ανάληψη Task</button>";        
             marker7.bindPopup(content7, {
                 maxWidth: '200'
             });
@@ -187,22 +188,49 @@ function handleMarkers(data, map) {
             marker7.on('popupopen', function() {
                 var btn = document.getElementById('accept');
                 btn.addEventListener('click', function() {
-                    if (inrange(marker1, this, 50)) {
-                        make_ajax_post(marker1);
-                        accept_task(this.options.request_id, 'request');
-                        alert('Ανάληψη Επιτυχής');
-                    }
+                    accept_task(this.options.request_id, 'request');
+                    alert('Ανάληψη Επιτυχής');
                 }.bind(this)); 
             });
+        }else if(state == "loaded" && savior_id != null){
+            var marker7 = new L.Marker([Latitude, Longitude], {
+                icon: customIcon4,
+                request_id : data.requests[i].id_req 
+                }).addTo(map);
+            request_markers.push(marker7);
+            var content7 = "<h2>Name: " + name + "</h2>" 
+            + "<h2>Last Name: " + lastname + "</h2>" 
+            + "<p>Telephone: " + telephone + "</br>" 
+            + "<p>People: " + people + "</br>" 
+            + "<p>Time: " + time + "</br>" 
+            + "<p>Product Name</br>"; 
+            for (var j = 0; j < product_names.length; j++) {
+                content7 += "<p>" + product_names[j] + "</p>"; 
+            }
+            
+            content7 +="<button id='delivery'>Παράδοση</button>";         
+            marker7.bindPopup(content7, {
+                maxWidth: '200'
+            });
+            marker7.addTo(map);
+            var kuklos7 = L.circle(marker7.getLatLng(), {
+                color: 'red',
+                radius: 50
+            }).addTo(map);
+            requestLayerGroup.addLayer(marker7);
+            requestLayerGroup.addLayer(kuklos7);
             marker7.on('popupopen', function() {
                 var btn2 = document.getElementById('delivery');
                 btn2.addEventListener('click', function() {
                     if (inrange(marker1, this, 50)) {
+                        make_ajax_post(marker1);
                         accept_task(this.options.request_id, 'delivery');
+                        alert('Παράδοση Επιτυχής');
                     }
                 }.bind(this)); 
             });
         }
+
     };
     var offer_markers = [];
     for (var i = 0; i < data.offers.length; i++) {

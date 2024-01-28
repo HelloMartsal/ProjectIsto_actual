@@ -9,7 +9,6 @@ function accept_request(object $conn, int $task_id,int $user_id){
     update_request($conn,$task_id,$user_id);
 }
 
-//TODO PUT STUFF HERE
 function deliver_request(object $conn, int $task_id){
     move_request($conn,$task_id);
     remove_request($conn,$task_id);
