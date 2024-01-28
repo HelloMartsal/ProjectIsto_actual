@@ -49,6 +49,7 @@ if ($_SESSION["user_type"]!=="admin"){
     <form action="php/push_cat.php" method="post" >
     <div id="response1"></div>
     <?php
+    category_exists();
     show_new_category();
     ?>
     <h1>Add New Category</h1>
@@ -75,7 +76,6 @@ if ($_SESSION["user_type"]!=="admin"){
         <input type="submit" value="Upload">
     </form>
     </div>
-    <!-- TODO Print the base down here load.js tou mitsou-->
 </body>
 <?php
 var_dump($_SESSION);
