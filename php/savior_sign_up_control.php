@@ -16,6 +16,7 @@ function username_taken(object $conn,string $username){
     }
     
 }
+// TODO bale kai ston pinaka vehicles
 function create_savior_profile(object $conn,string $username1,string $password1,string $onoma, string $lastname,string $phonenum,string $salt,string $pepper){
     set_savior_profile($conn,$username1,$password1,$onoma,$lastname,$phonenum,$salt,$pepper);
 }
