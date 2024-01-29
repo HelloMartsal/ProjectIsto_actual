@@ -238,7 +238,6 @@ function handleMarkers(data, map) {
         var userType = data.offers[i].usertype;
         var telephone = data.offers[i].phonenum;
         var lastname = data.offers[i].epitheto;
-        var quantity = data.offers[i].quant;
         var time = data.offers[i].time;
         var savior_id = data.offers[i].savior_id;
         var product_names = [];
