@@ -68,4 +68,49 @@ $select = "SELECT * FROM request WHERE id_req = :task_id";
 
 
 }
+function compare_quant(object $conn, int $task_id){
+    $select = "SELECT * FROM request WHERE id_req = :task_id";
+    $check = $conn->prepare($select);
+    $check->bindParam(':task_id', $task_id);
+    $check->execute();
+    $result = $check->fetchAll(PDO::FETCH_ASSOC);
+    foreach($result as $row=>$value){
+        $items = [];
+        $select = "SELECT id_item_l FROM req_item_link WHERE id_req_l = :id";
+        $check = $conn->prepare($select);
+        $check->bindParam(':id', $value["id_req"], PDO::PARAM_INT);
+        $check->execute();
+        $result2 = $check->fetchAll(PDO::FETCH_ASSOC);
+        foreach($result2 as $row2=>$value2){
+            $items[] = $value2;
+ 
+        }
+        $result[$row]["items"] = $items;
+    }
+    $flag = true;
+    foreach ($result as $row=>$value){
+        $people = $value["people"];
+        $items = $value["items"];
+        $select = "SELECT * FROM base WHERE id_item = :id";
+        foreach ($items as $row2=>$value2){
+            $check = $conn->prepare($select);
+            $check ->bindParam(':id', $value2["id_item_l"], PDO::PARAM_INT);
+            $check->execute();
+            if ($check->rowCount() == 0){
+                $flag = false;
+                break;
+            }
+            $result3 = $check->fetchAll(PDO::FETCH_ASSOC);
+            if($result3[0]["quant"]<$people){
+                $flag = false;
+                break;
+            }
+
+        }
+        if ($flag == false){
+            break;
+        }
+    } 
+    return $flag;
+}
 ?>

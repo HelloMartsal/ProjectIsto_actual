@@ -13,9 +13,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             accept_offer($conn,$task_id,$user_id);
         }
         else if($type == 'request'){
-            // TODO check if there is enough quantity in the base and if not print an error
-           accept_request($conn,$task_id,$user_id); 
-        }else if ($type == 'delivery'){
+            if(check_availability($conn,$task_id)){
+                accept_request($conn,$task_id,$user_id);
+            }
+            else{
+                echo "Not enough items";
+                die();
+            }
+       }else if ($type == 'delivery'){
             deliver_request($conn,$task_id);
         }
         
