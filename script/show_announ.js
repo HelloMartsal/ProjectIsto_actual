@@ -41,18 +41,30 @@ function create_announcements(announcements) {
         announcementButton.className = 'announcement-button';
         announcementButton.id = 'announcement-button-' + i;
         announcementButton.addEventListener('click', function() {
-            send_announ_id(announcement.id_ann);
+            send_announ_id(announcement.id_ann, 'donation');
         });
         
+        var requestButton = document.createElement('button');
+        requestButton.innerHTML = 'Αίτηση';
+        requestButton.className = 'announcement-button';
+        requestButton.id = 'announcement-button-' + i;
+        requestButton.addEventListener('click', function() {
+            send_announ_id(announcement.id_ann, 'request');
+        });
         announcementElement.appendChild(announcementTitle);
         announcementElement.appendChild(announcementBody);
         announcementElement.appendChild(announcementDate);
         announcementElement.appendChild(announcementButton);
+        announcementElement.appendChild(requestButton);
         announ.appendChild(announcementElement);
         
     }
 }
 
-function send_announ_id(id_ann) {
-    window.location.href = 'donation_page.php?id_ann=' + id_ann;
+function send_announ_id(id_ann, type) {
+    if (type == 'donation') {
+        window.location.href = 'donation_page.php?id_ann=' + id_ann;
+    } else if (type == 'request'){
+        window.location.href = 'request_page.php?id_ann=' + id_ann;
+    }
 }
