@@ -10,6 +10,7 @@ require_once 'php/login_view.php';
     <meta charset="UTF-8">
     <title>Σύνδεση σε λογαριασμό</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.css">
+    <script src="script/form.js"></script>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -33,7 +34,7 @@ require_once 'php/login_view.php';
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 300px; /* Καθορίστε το επιθυμητό πλάτος της φόρμας */
+            width: 300px; 
         }
 
         form {
