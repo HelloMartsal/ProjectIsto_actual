@@ -43,7 +43,13 @@ function create_announcements(announcements) {
         announcementButton.addEventListener('click', function() {
             send_announ_id(announcement.id_ann, 'donation');
         });
-        //TODO BALE NA BGAINOYN KAI TA PROIONTA
+        var announcementProduct = document.createElement('tr')
+        for (var key in announcement.products) {
+        announcementProduct.innerHTML +='<li>'+announcement.products[key] +'<br>'+'</li>'; 
+        }
+        
+        announcementProduct.className = 'products';
+        announcementProduct.id = 'announcement-products-' + i;
         
         var requestButton = document.createElement('button');
         requestButton.innerHTML = 'Αίτηση';
@@ -54,6 +60,7 @@ function create_announcements(announcements) {
         });
         announcementElement.appendChild(announcementTitle);
         announcementElement.appendChild(announcementBody);
+        announcementElement.appendChild(announcementProduct);
         announcementElement.appendChild(announcementDate);
         announcementElement.appendChild(announcementButton);
         announcementElement.appendChild(requestButton);
