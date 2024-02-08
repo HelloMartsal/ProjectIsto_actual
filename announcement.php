@@ -31,7 +31,7 @@
 
             <button type="button" onclick="submitForm()">Submit</button>
         </form>
-        <a href="index.php">
+        <a href="add_cat_item.php">
                 <button>Add Category or Item</button>
         </a>
 

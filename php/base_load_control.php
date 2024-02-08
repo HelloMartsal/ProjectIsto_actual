@@ -20,6 +20,7 @@ function encode_to_request($conn){
     $user_id = (int)$user_id;
     $result = get_request_by_user($conn,$user_id);
     $result = get_agro($result);
+    set_state_request($conn,$user_id);
     remove_items_from_base($conn, $result);
 
 }

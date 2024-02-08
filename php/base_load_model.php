@@ -101,7 +101,6 @@ function get_request_by_user(object $conn,int $user_id){
 }
 
 function remove_items_from_base(object $conn, array $result){
-    var_dump($result);
     foreach($result as $row=>$value){
         $select = "UPDATE base SET quant = quant - :quant WHERE id_item = :id_item";
         $check = $conn->prepare($select);
@@ -109,5 +108,12 @@ function remove_items_from_base(object $conn, array $result){
         $check->bindParam(':quant', $value["quant"], PDO::PARAM_INT);
         $check->execute();
     }
+}
+
+function set_state_request(object $conn, int $user_id){
+    $select = "UPDATE request SET state = 'loaded' WHERE savior_id = :user_id";
+    $check = $conn->prepare($select);
+    $check->bindParam(':user_id', $user_id);
+    $check->execute();
 }
 ?>

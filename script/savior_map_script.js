@@ -1,4 +1,3 @@
-// TODO FIX MULTIPLE OFFERS ON THE SAME SPOT
 function init() {
     var map = L.map('map').setView([38.246254, 21.735125], 15);
     var osmLink = "<a href='http://www.openstreetmap.org'>Open StreetMap</a>";
@@ -100,6 +99,7 @@ function handleMarkers(data, map) {
             var btn = document.getElementById('delivery');
             btn.addEventListener('click', function() {
                 if (inrange(marker1, this, 100)) {
+                    make_ajax_post(marker1);
                     on_off_load('offer');
                 }
             }.bind(this));
@@ -108,6 +108,7 @@ function handleMarkers(data, map) {
             var btn2 = document.getElementById('extract');
             btn2.addEventListener('click', function() {
                 if (inrange(marker1, this, 100)) {
+                    make_ajax_post(marker1);
                     on_off_load('request');
                     alert('Φόρτωση Επιτυχής');
                 }
@@ -115,211 +116,244 @@ function handleMarkers(data, map) {
         });
     }
     var request_markers = [];
-    for (var i = 0; i < data.requests.length; i++) {
-        var name = data.requests[i].onoma;
-        var userType = data.requests[i].usertype;
-        var telephone = data.requests[i].phonenum;
-        var lastname = data.requests[i].epitheto;
-        var people = data.requests[i].people;
-        var time = data.requests[i].time;
-        var savior_id = data.requests[i].savior_id;
-        var product_names = [];
-        var productNamesObj = data.requests[i].product_names;
-        for (var key in productNamesObj) {
-            if (productNamesObj.hasOwnProperty(key)) {
-                product_names.push(productNamesObj[key]);
+    var req_keys = Object.keys(data.requests);
+    for (var i = 0; i < req_keys.length; i++) {
+        var key = req_keys[i];
+        var values = data.requests[key];
+        var number = values.length;
+        var Latitude = values[0].Latitude;
+        var Longitude = values[0].Longitude;
+        var content = [];
+        flag = 0;
+        for (var j = 0; j < number; j++) {
+            var name = values[j].onoma;
+            var userType = values[j].usertype;
+            var telephone = values[j].phonenum;            
+            var lastname = values[j].epitheto;
+            var time = values[j].time;
+            var product_names = [];
+            var quantitiesObj = values[j].quantities;
+            var productNamesObj = values[j].product_names;
+            var state = values[j].state;
+            var savior_id = values[j].savior_id;
+            var accept_date = values[j].accept_date;
+            var username_veh = values[j].username_veh;
+            for (var key in productNamesObj) {
+                if (productNamesObj.hasOwnProperty(key)) {
+                    product_names.push(productNamesObj[key]);
+                }
             }
+            var index = number+"a"+ j;
+            content[index] = "<h2>Αίτηση "+j+"</h2>";
+            content[index] += "<h2>Name: " + name + "</h2>"
+            + "<h2>Last Name: " + lastname + "</h2>"
+            + "<p>Telephone: " + telephone + "</br>"
+            + "<p>Ημερομηνία Δημ/γιας: " + time + "</br>"
+            + "<p>Product Name: </br>";
+            for (var l = 0; l < product_names.length; l++) {
+                content[index] += "<p>" + product_names[l] + "</p>"; 
+            }
+            if (state == "nothing"){
+                content[index] += "<button id='accept_req"+index+"' data-request-id = '"+ values[j].id_req +"'>Ανάληψη Task</button>";
+            }else if (state == "loaded"){
+                content[index] += "<button id='deliver"+index+"' data-request-id = '"+ values[j].id_req +"'>Παράδοση</button>";
+            }else if (state == "accepted"){
+                content[index] += "<p>Διασώστης: "+savior_id +"</p>"
+                +"<p>Όχημα: " + username_veh + "</p>"
+                +"<p>Παραλαβή: " + accept_date + "</p>"
+                +"<p>Κατάσταση: " + state + "</p>";
         }
-        var username_veh = data.requests[i].username_veh;
-        var accept_date = data.requests[i].accept_date;
-        var Latitude = data.requests[i].Latitude;
-        var Longitude = data.requests[i].Longitude;
-        var state = data.requests[i].state;
-        if (savior_id != null && state == "accepted") {
-            var marker4 = new L.Marker([Latitude, Longitude], {
-                icon: customIcon4,
-                request_id : data.requests[i].id_req 
-                }).addTo(map);
-            request_markers.push(marker4);
-            var content4 = "<h2>Name: " + name + "</h2>" 
-            + "<h2>Last Name: " + lastname + "</h2>" 
-            + "<p>Telephone: " + telephone + "</br>" 
-            + "<p>People: " + people + "</br>" 
-            + "<p>Time: " + time + "</br>"
-            + "<p>Product Name</br>"; 
-            for (var j = 0; j < product_names.length; j++) {
-                content4 += "<p>" + product_names[j] + "</p>"; 
-            }
-            
-            content4 += "<p>Username Vehicle: " + username_veh + "</br>" 
-            + "<p>Accept Date: " + accept_date + "</br>";      
-            marker4.bindPopup(content4, {
-                maxWidth: '200'
-            });
-            marker4.addTo(map);
-            requestLayerGroup.addLayer(marker4);
-        } else if (savior_id == null) {
-            var marker7 = new L.Marker([Latitude, Longitude], {
-                icon: customIcon4,
-                request_id : data.requests[i].id_req 
-                }).addTo(map);
-            request_markers.push(marker7);
-            var content7 = "<h2>Name: " + name + "</h2>" 
-            + "<h2>Last Name: " + lastname + "</h2>" 
-            + "<p>Telephone: " + telephone + "</br>" 
-            + "<p>People: " + people + "</br>" 
-            + "<p>Time: " + time + "</br>" 
-            + "<p>Product Name</br>"; 
-            for (var j = 0; j < product_names.length; j++) {
-                content7 += "<p>" + product_names[j] + "</p>"; 
-            }
-            
-            content7 +="<button id='accept'>Ανάληψη Task</button>";        
-            marker7.bindPopup(content7, {
-                maxWidth: '200'
-            });
-            marker7.addTo(map);
-            var kuklos7 = L.circle(marker7.getLatLng(), {
-                color: 'red',
-                radius: 50
+        var markerreq = new L.Marker([Latitude, Longitude], {
+            icon: customIcon4,
+            number : number,
+            content : content,
+            request_id : key
             }).addTo(map);
-            requestLayerGroup.addLayer(marker7);
-            requestLayerGroup.addLayer(kuklos7);
-            marker7.on('popupopen', function() {
-                var btn = document.getElementById('accept');
-                btn.addEventListener('click', function() {
-                    accept_task(this.options.request_id, 'request');
-                    alert('Ανάληψη Επιτυχής');
-                }.bind(this)); 
-            });
-        }else if(state == "loaded" && savior_id != null){
-            var marker7 = new L.Marker([Latitude, Longitude], {
-                icon: customIcon4,
-                request_id : data.requests[i].id_req 
-                }).addTo(map);
-            request_markers.push(marker7);
-            var content7 = "<h2>Name: " + name + "</h2>" 
-            + "<h2>Last Name: " + lastname + "</h2>" 
-            + "<p>Telephone: " + telephone + "</br>" 
-            + "<p>People: " + people + "</br>" 
-            + "<p>Time: " + time + "</br>" 
-            + "<p>Product Name</br>"; 
-            for (var j = 0; j < product_names.length; j++) {
-                content7 += "<p>" + product_names[j] + "</p>"; 
-            }
-            
-            content7 +="<button id='delivery'>Παράδοση</button>";         
-            marker7.bindPopup(content7, {
-                maxWidth: '200'
-            });
-            marker7.addTo(map);
-            var kuklos7 = L.circle(marker7.getLatLng(), {
-                color: 'red',
-                radius: 50
-            }).addTo(map);
-            requestLayerGroup.addLayer(marker7);
-            requestLayerGroup.addLayer(kuklos7);
-            marker7.on('popupopen', function() {
-                var btn2 = document.getElementById('delivery');
-                btn2.addEventListener('click', function() {
-                    if (inrange(marker1, this, 50)) {
-                        make_ajax_post(marker1);
-                        accept_task(this.options.request_id, 'delivery');
-                        alert('Παράδοση Επιτυχής');
-                    }
-                }.bind(this)); 
-            });
-        }
+        var contentreq = "<h2>Αίτηση</h2>"
+        + "<p>Όνομα: " +values[0].onoma +" "+values[0].epitheto+ "</br>";
+        for (var k = 0; k < number; k++) {
+            contentreq += "<button id='req_extract" +number+"a"+k + "'>Αίτηση "+(k+1) +"</button>";
 
-    };
-    var offer_markers = [];
-    for (var i = 0; i < data.offers.length; i++) {
-        var name = data.offers[i].onoma;
-        var userType = data.offers[i].usertype;
-        var telephone = data.offers[i].phonenum;
-        var lastname = data.offers[i].epitheto;
-        var time = data.offers[i].time;
-        var savior_id = data.offers[i].savior_id;
-        var product_names = [];
-        var quantities = [];
-        var quantitiesObj = data.offers[i].quantities;
-        var productNamesObj = data.offers[i].product_names;
-        for (var key in productNamesObj) {
-            if (productNamesObj.hasOwnProperty(key)) {
-                product_names.push(productNamesObj[key]);
-            }
         }
-        for (var key in quantitiesObj) {
-            if (quantitiesObj.hasOwnProperty(key)) {
-                quantities.push(quantitiesObj[key]);
+        markerreq.bindPopup(contentreq, {
+            maxWidth: '200'
+        });
+        var kuklosreq = L.circle(markerreq.getLatLng(), {
+            color: 'red',
+            radius: 50
+        }).addTo(map);
+        requestLayerGroup.addLayer(markerreq);
+        requestLayerGroup.addLayer(kuklosreq);
+        markerreq.on('popupopen', function() {
+            var btn = [];
+            for (var k = 0; k < this.options.number; k++) {
+                btn[k] = document.getElementById('req_extract' +this.options.number+"a"+ k);
+                var popup = L.popup();
+                var index = this.options.number+"a"+ k;
+        
+                // IIFE
+                //In this code, (function(index, btn, popup) {...}).bind(this)(index, btn[k], popup);
+                // creates a new function for each iteration of the loop, each with its own index, btn, 
+                //and popup variables. This ensures that each event listener is referencing the correct values.
+                (function(index, btn, popup) {
+                    btn.addEventListener('click', function() {
+                        popup
+                            .setLatLng(this.getLatLng())
+                            .setContent(this.options.content[index])
+                            .openOn(map);
+
+                            (function(index) {
+                                var acceptButton = document.getElementById('accept_req' + index);
+                                console.log(acceptButton);
+                                if (acceptButton) {
+                                    acceptButton.addEventListener('click', function() {
+                                        var request_id = acceptButton.dataset.requestId;
+                                        make_ajax_post(marker1);
+                                        accept_task(request_id, 'request');
+                                        alert('Ανάληψη Επιτυχής');
+                                    });
+                                }
+                            })(index);
+
+                            (function(index) {
+                                var deliverButton = document.getElementById('deliver' + index);
+                                console.log(deliverButton);
+                                if (deliverButton) {
+                                    deliverButton.addEventListener('click', function() {
+                                        var request_id = deliverButton.dataset.requestId;
+                                        make_ajax_post(marker1);
+                                        accept_task(request_id, 'delivery');
+                                        alert('Παράδοση Επιτυχής');
+                                    });
+                                }
+                            })(index);
+                    }.bind(this));
+                }).bind(this)(index, btn[k], popup);
             }
-        }
-        var username_veh = data.offers[i].username_veh;
-        var accept_date = data.offers[i].accept_date;
-        var Latitude = data.offers[i].Latitude;
-        var Longitude = data.offers[i].Longitude;
-        if (data.offers[i].savior_id != null) {
-            var marker5 = new L.Marker([Latitude, Longitude], { 
-                icon: customIcon5,
-                offer_id : data.offers[i].id_off
-            }).addTo(map);
-            offer_markers.push(marker5);
-            var content5 = "<h2>Name: " + name + "</h2>" 
-            + "<h2>Last Name: " + lastname + "</h2>" 
-            + "<p>Telephone: " + telephone + "</br>" 
-            + "<p>Time: " + time + "</br>" 
+        });
+    }
+    }
+
+    var keys = Object.keys(data.offers);
+    for (var i = 0; i < keys.length; i++) {
+        var key = keys[i];
+        var values = data.offers[key];
+        var number = values.length;
+        var Latitude = values[0].Latitude;
+        var Longitude = values[0].Longitude;
+        var content = [];
+        flag = 0;
+        for (var j = 0; j < number; j++) {
+            var name = values[j].onoma;
+            var userType = values[j].usertype;
+            var telephone = values[j].phonenum;
+            var lastname = values[j].epitheto;
+            var time = values[j].time;
+            var product_names = [];
+            var quantities = [];
+            var quantitiesObj = values[j].quantities;
+            var productNamesObj = values[j].product_names;
+            var savior_id = values[j].savior_id;
+            var state = values[j].state;
+            var accept_date = values[j].accept_date;
+            for (var key in productNamesObj) {
+                if (productNamesObj.hasOwnProperty(key)) {
+                    product_names.push(productNamesObj[key]);
+                }
+            }
+            for (var key in quantitiesObj) {
+                if (quantitiesObj.hasOwnProperty(key)) {
+                    quantities.push(quantitiesObj[key]);
+                }
+            }
+            var index = number+"b"+ j;
+            if (savior_id != null) {
+                content[index] = "<h2>Προσφορά "+j+"</h2>";
+                content[index] += "<h2>Name: " + name + "</h2>"
+                + "<h2>Last Name: " + lastname + "</h2>"
+                + "<p>Telephone: " + telephone + "</br>"
+                + "<p>Ημερομηνία Δημ/γιας: " + time + "</br>"
+                + "<p>Product Name and Quantity: </br>";
+                for (var l = 0; l < product_names.length; l++) {
+                    content[index] += "<p>" + product_names[l] + ": " + quantities[l] + "</p>"; 
+                }
+                content[index] += "<p>Διασώστης: " + savior_id + "</p>"
+                +"<p>Παραλαβή: " + accept_date + "</p>";
+                continue;
+            }
+            content[index] = "<h2>Προσφορά "+j+"</h2>";
+            content[index] += "<h2>Name: " + name + "</h2>"
+            + "<h2>Last Name: " + lastname + "</h2>"
+            + "<p>Telephone: " + telephone + "</br>"
+            + "<p>Time: " + time + "</br>"
             + "<p>Product Name and Quantity: </br>"; 
             
-            for (var j = 0; j < product_names.length; j++) {
-                content5 += "<p>" + product_names[j] + ": " + quantities[j] + "</p>"; 
+            for (var l = 0; l < product_names.length; l++) {
+                content[index] += "<p>" + product_names[l] + ": " + quantities[l] + "</p>"; 
             }
             
-            content5 += "<p>Username Vehicle: " + username_veh + "</br>" 
-            + "<p>Accept Date: " + accept_date + "</br>"; 
-            marker5.bindPopup(content5, {
-                maxWidth: '200'
-            });
-            marker5.addTo(map);
-            offerLayerGroup.addLayer(marker5);
-        } else {
-            var marker6 = new L.Marker([Latitude, Longitude], { 
-                icon: customIcon5,
-                offer_id : data.offers[i].id_off
-            }).addTo(map);
-            offer_markers.push(marker6);
-            var content6 = "<h2>Name: " + name + "</h2>" 
-            + "<h2>Last Name: " + lastname + "</h2>" 
-            + "<p>Telephone: " + telephone + "</br>" 
-            + "<p>Time: " + time + "</br>" 
-            + "<p>Product Name and Quantity: </br>"; // start product name and quantity section
+            content[index] += "<button id='accept"+index+"' data-offer-id = '"+ values[j].id_off +"'>Παραλαβή</button>";
             
-            for (var j = 0; j < product_names.length; j++) {
-                content6 += "<p>" + product_names[j] + ": " + quantities[j] + "</p>"; // add each product name and its quantity
-            }
-            
-            content6 += "<button id='extract'> Παραλαβή </button>";
-            marker6.bindPopup(content6, {
-                maxWidth: '200'
-            });
-            marker6.addTo(map);
-            var kuklos6 = L.circle(marker6.getLatLng(), {
-                color: 'red',
-                radius: 50
-            }).addTo(map);
-            offerLayerGroup.addLayer(marker6);
-            offerLayerGroup.addLayer(kuklos6);
-            marker6.on('popupopen', function() {
-                var btn = document.getElementById('extract');
-                btn.addEventListener('click', function() {
-                    if(inrange(marker1, this, 50)){
-                        make_ajax_post(marker1);
-                        accept_task(this.options.offer_id, 'offer');
-                        alert('Παραλαβή Επιτυχής');
-                    }
-                }.bind(this));
-            });
         }
-    };
+        var markeroff = new L.Marker([Latitude, Longitude], {
+            icon: customIcon5,
+            number : number,
+            content : content,
+            offer_id : key
+            }).addTo(map);
+        var contentoff = "<h2>Προσφορά</h2>"
+        + "<p>Όνομα: " +values[0].onoma +" "+values[0].epitheto+ "</br>";
+        for (var k = 0; k < number; k++) {
+            contentoff += "<button id='extract" +number+"b"+k + "'>Προσφορά "+(k+1) +"</button>";
+        }
+        markeroff.bindPopup(contentoff, {
+            maxWidth: '200'
+        });
+        var kuklosoff = L.circle(markeroff.getLatLng(), {
+            color: 'red',
+            radius: 50
+        }).addTo(map);
+        offerLayerGroup.addLayer(markeroff);
+        offerLayerGroup.addLayer(kuklosoff);
+
+        markeroff.on('popupopen', function() {
+            var btn = [];
+            for (var k = 0; k < this.options.number; k++) {
+                btn[k] = document.getElementById('extract' +this.options.number+"b"+ k);
+                var popup = L.popup();
+                var index = this.options.number+"b"+ k;
+        
+                // IIFE
+                //In this code, (function(index, btn, popup) {...}).bind(this)(index, btn[k], popup);
+                // creates a new function for each iteration of the loop, each with its own index, btn, 
+                //and popup variables. This ensures that each event listener is referencing the correct values.
+                (function(index, btn, popup) {
+                    btn.addEventListener('click', function() {
+                        popup
+                            .setLatLng(this.getLatLng())
+                            .setContent(this.options.content[index])
+                            .openOn(map);
+                            marker = this;
+                            (function(index,marker) {
+                                var acceptButton = document.getElementById('accept' + index);
+                                console.log(acceptButton);
+                                if (acceptButton) {
+                                    acceptButton.addEventListener('click', function() {
+                                        if (inrange(marker1, marker, 100)) {
+                                            var offer_id = acceptButton.dataset.offerId;
+                                            make_ajax_post(marker1);
+                                            accept_task(offer_id, 'offer');
+                                            alert('Παραλαβή Επιτυχής');
+                                        }
+                                    });
+                                }
+                            })(index,marker);
+                    }.bind(this));
+                }).bind(this)(index, btn[k], popup);
+            }
+        });
+        
+    }
     
     //Emfanisi tou confirmation box
     prev_coordinates = marker1.getLatLng();

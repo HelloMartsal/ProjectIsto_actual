@@ -19,6 +19,7 @@ function get_base(object $conn) {
 }
 
 function get_offers(object $conn) {
+    $group_results = [];
     $select = "SELECT * FROM offers;";
     $check = $conn->prepare($select);
     $check->execute();
@@ -32,9 +33,15 @@ function get_offers(object $conn) {
         foreach ($result2[0] as $column => $data) {
             $result[$key][$column] = $data;
         }
+        $user = $value['user'];
+        if (!array_key_exists($user, $group_results)) {
+            $group_results[$user] = [];
+        }
+        array_push($group_results[$user], $result[$key]);
     }
+
     foreach ($result as $key => $value) {
-        $select = "SELECT id_item_l,quant FROM off_item_link WHERE id_off_l = :id;";
+        $select = "SELECT id_off_l,id_item_l,quant FROM off_item_link WHERE id_off_l = :id;";
         $check = $conn->prepare($select);
         $check->bindParam(':id', $value['id_off']);
         $check->execute();
@@ -55,6 +62,13 @@ function get_offers(object $conn) {
             $result[$key]['product_names'] = $productNames;
             $result[$key]['quantities'] = $quantities;
         }
+        foreach ($group_results[$value['user']] as $key2 => $value2) {
+            if ($value2['id_off'] == $value['id_off']) {
+                $group_results[$value['user']][$key2]["product_names"] = $result[$key]['product_names'];
+                $group_results[$value['user']][$key2]["quantities"] = $result[$key]['quantities'];
+            }
+        }
+
     }
     foreach ($result as $key => $value) {
         if ($value['savior_id'] != NULL){
@@ -66,12 +80,18 @@ function get_offers(object $conn) {
             foreach ($result2[0] as $column => $data) {
                 $result[$key][$column] = $data;
             }
+            foreach ($group_results[$value['user']] as $key2 => $value2) {
+                if ($value2['savior_id'] == $value['savior_id']) {
+                    $group_results[$value['user']][$key2]["username_veh"]= $result[$key]['username_veh'];
+                }
+            }
         }
     }
-    return $result;
+    return $group_results;
 }
 
 function get_requests(object $conn) {
+    $group_results = [];
     $select = "SELECT * FROM request;";
     $check = $conn->prepare($select);
     $check->execute();
@@ -85,9 +105,14 @@ function get_requests(object $conn) {
         foreach ($result2[0] as $column => $data) {
             $result[$key][$column] = $data;
         }
+        $user = $value['user'];
+        if (!array_key_exists($user, $group_results)) {
+            $group_results[$user] = [];
+        }
+        array_push($group_results[$user], $result[$key]);
     }
     foreach ($result as $key => $value) {
-        $select = "SELECT id_item_l FROM req_item_link WHERE id_req_l = :id;";
+        $select = "SELECT id_req_l,id_item_l FROM req_item_link WHERE id_req_l = :id;";
         $check = $conn->prepare($select);
         $check->bindParam(':id', $value['id_req']);
         $check->execute();
@@ -105,6 +130,11 @@ function get_requests(object $conn) {
             
             $result[$key]['product_names'] = $productNames;
         }
+        foreach ($group_results[$value['user']] as $key2 => $value2) {
+            if ($value2['id_req'] == $value['id_req']) {
+                $group_results[$value['user']][$key2]["product_names"] = $result[$key]['product_names'];
+            }
+        }
     }
     foreach ($result as $key => $value) {
         if ($value['savior_id'] != NULL){
@@ -116,9 +146,14 @@ function get_requests(object $conn) {
             foreach ($result2[0] as $column => $data) {
                 $result[$key][$column] = $data;
             }
+            foreach ($group_results[$value['user']] as $key2 => $value2) {
+                if ($value2['savior_id'] == $value['savior_id']) {
+                    $group_results[$value['user']][$key2]["username_veh"]= $result[$key]['username_veh'];
+                }
+            }
         }
     }
-    return $result;
+    return $group_results;
 }
 
 
