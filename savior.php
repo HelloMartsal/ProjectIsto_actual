@@ -134,14 +134,13 @@ if ($_SESSION["user_type"]!=="savior"){
             <a href="contact.php">Επικοινωνία</a>
             <a href="savior_map_page.php">Χάρτης</a>
             <a href="logout.php">Αποσύνδεση</a>
+            <a href="show_tasks_offer.php">Ενεργές Προσφορές</a>
+            <a href="show_tasks_req.php">Ενεργές Αιτήσεις</a>
 
         </div>
     </div>
 
 </body>
-<?php
-var_dump($_SESSION);
-?>
 <footer>
     <p>&copy; Πλατφόρμα συντονισμού εθελοντών 2023</p>
 </footer>

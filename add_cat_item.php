@@ -16,78 +16,17 @@ if ($_SESSION["user_type"] !== "admin") {
     <script src="script/push_item.js" defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.css">
+    <title>Add Item or Category</title>
     <style>
-        body {
-            background-color: #1a3a1d;
-            color: #ffffff;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
         .form-container {
             display: flex;
             justify-content: space-between;
-            background-color: #23442e;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin: 20px;
-            padding: 20px;
-            border-radius: 8px;
-            width: 100vw;
         }
-
-        form {
+        .form-container > form {
             flex: 1;
             margin: 10px;
         }
-
-        h1 {
-            color: #ffffff;
-        }
-
-        label {
-            color: #ffffff;
-        }
-
-        input {
-            padding: 8px;
-            margin-bottom: 10px;
-            border: 1px solid #000000;
-            border-radius: 4px;
-        }
-
-        input[type="button"],
-        input[type="submit"] {
-            background-color: #1c291d;
-            color: #ffffff;
-            cursor: pointer;
-        }
-
-        input[type="button"]:hover,
-        input[type="submit"]:hover {
-            background-color: #2d6430;
-        }
-
-        #response,
-        #response1 {
-            margin-top: 10px;
-            padding: 10px;
-            background-color: #4c6958;
-            border: 1px solid #282d30;
-            border-radius: 4px;
-            color: #3d4447;
-        }
-        footer {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 10px;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-}
     </style>
-    <title>Add Item or Category</title>
 </head>
 <body>
     <div class="form-container">
@@ -139,7 +78,4 @@ if ($_SESSION["user_type"] !== "admin") {
         </form>
     </div>
 </body>
-<?php
-var_dump($_SESSION);
-?>
 </html>

@@ -165,9 +165,6 @@ if (isset($_SESSION["user_type"])){
     </div>
 
 </body>
-<?php
-var_dump($_SESSION);
-?>
 <footer>
     <p>&copy; Πλατφόρμα συντονισμού εθελοντών 2023</p>
 </footer>

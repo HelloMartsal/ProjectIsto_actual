@@ -108,9 +108,6 @@ footer {
             <input type="submit" value="Submit">
         </form>
     </div>
-    <?php
-var_dump($_SESSION);
-?>
     <footer>
         <p>&copy; Πλατφόρμα συντονισμού εθελοντών 2023</p>
     </footer>

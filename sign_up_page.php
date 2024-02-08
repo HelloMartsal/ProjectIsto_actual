@@ -122,11 +122,8 @@ require_once 'php/sign_up_view.php';
     <footer>
         <p>&copy; Πλατφόρμα συντονισμού εθελοντών 2023</p>
     </footer>
-    <?php
-    var_dump($_SESSION);
-    ?>
+
 </body>
 
 </html>
 
-``

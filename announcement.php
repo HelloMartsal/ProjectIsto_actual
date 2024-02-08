@@ -94,7 +94,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Create a Blog Post</h1>
+        <h1>Δημιουργία Ανακοινώσεων</h1>
         <form id="blogForm">
             <label for="title">Title:</label>
             <input type="text" id="title" name="title" required>

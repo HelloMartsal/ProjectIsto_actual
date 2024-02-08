@@ -104,9 +104,6 @@ input[type="reset"]:hover {
     check_savior_sign_up_errors();
     ?>
 </body>
-<?php
-var_dump($_SESSION);
-?>
 <footer>
     <p>&copy; Πλατφόρμα συντονισμού εθελοντών 2023</p>
 </footer>

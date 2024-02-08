@@ -35,9 +35,7 @@ require_once 'php/process_coordinates_control.php';
 <script src="script/nextbutton.js"></script>
 
 </body>
-<?php
-var_dump($_SESSION);
-?>
+
 <footer>
     <p>&copy; Πλατφόρμα συντονισμού εθελοντών 2023</p>
 </footer>

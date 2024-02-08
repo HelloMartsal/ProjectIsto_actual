@@ -36,9 +36,7 @@ if ($_SESSION["user_type"]!=="admin"){
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="script/map_script_up.js"></script>
 </body>
-<?php
-var_dump($_SESSION);
-?>
+
     <footer>
     <p>&copy; Πλατφόρμα συντονισμού εθελοντών 2023</p>
     </footer>
