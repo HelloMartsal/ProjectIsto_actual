@@ -11,6 +11,72 @@ require_once 'php/savior_sign_up_view.php';
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <style>
+        body {
+    font-family: 'Arial', sans-serif;
+    background-color: #264428;
+    color: #333;
+    margin: 0;
+}
+
+h1 {
+    color: #ffffff;
+}
+
+p {
+    color: #ffffff;
+}
+
+form {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #467455;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+input[type="text"],
+input[type="password"],
+input[type="tel"] {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #293129;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+button {
+    background-color: #324e40;
+    color: rgb(255, 255, 255);
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #2c462e;
+}
+
+input[type="reset"] {
+    background-color: #324e40;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type="reset"]:hover {
+    background-color: #2c462e;
+}
+
+
+
+    </style>
+
 </head>
 <body>
     <h1>Λογαριασμός Διασώστη</h1>

@@ -8,6 +8,82 @@ require_once 'php/config_sess.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style/con_style.css">
     <title>Contact Form</title>
+    <style>
+        body {
+    font-family: 'Arial', sans-serif;
+    background-color: #264428;
+    color: #333;
+    margin: 0;
+}
+
+.container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #4f855c;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.top-bar {
+    background-color: #1d2723;
+    padding: 10px;
+    text-align: center;
+    color: rgb(255, 255, 255);
+    width: 100%;
+}
+
+.site-name a {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.contact-form {
+    display: grid;
+    gap: 10px;
+}
+
+label {
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+textarea {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #2f4b34;
+    border-radius: 4px;
+}
+
+input[type="submit"] {
+    background-color: #486948;
+    color: rgb(255, 255, 255);
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #779c79;
+}
+
+footer {
+    background-color: #333;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+    </style>
 </head>
 <body>
     <div class="top-bar">
