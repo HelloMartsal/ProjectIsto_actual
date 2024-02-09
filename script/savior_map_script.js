@@ -201,7 +201,7 @@ function handleMarkers(data, map) {
                             .setLatLng(this.getLatLng())
                             .setContent(this.options.content[index])
                             .openOn(map);
-
+                            var marker = this;
                             (function(index) {
                                 var acceptButton = document.getElementById('accept_req' + index);
                                 console.log(acceptButton);
@@ -215,18 +215,20 @@ function handleMarkers(data, map) {
                                 }
                             })(index);
 
-                            (function(index) {
+                            (function(index,marker) {
                                 var deliverButton = document.getElementById('deliver' + index);
                                 console.log(deliverButton);
                                 if (deliverButton) {
                                     deliverButton.addEventListener('click', function() {
-                                        var request_id = deliverButton.dataset.requestId;
-                                        make_ajax_post(marker1);
-                                        accept_task(request_id, 'delivery');
-                                        alert('Παράδοση Επιτυχής');
+                                        if (inrange(marker1, marker, 100)) {
+                                            var request_id = deliverButton.dataset.requestId;
+                                            make_ajax_post(marker1);
+                                            accept_task(request_id, 'delivery');
+                                            alert('Παράδοση Επιτυχής');
+                                        }
                                     });
                                 }
-                            })(index);
+                            })(index,marker);
                     }.bind(this));
                 }).bind(this)(index, btn[k], popup);
             }
@@ -333,7 +335,7 @@ function handleMarkers(data, map) {
                             .setLatLng(this.getLatLng())
                             .setContent(this.options.content[index])
                             .openOn(map);
-                            marker = this;
+                            var marker = this;
                             (function(index,marker) {
                                 var acceptButton = document.getElementById('accept' + index);
                                 console.log(acceptButton);
