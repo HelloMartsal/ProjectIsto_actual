@@ -130,6 +130,7 @@ function handleMarkers(data, map) {
             var userType = values[j].usertype;
             var telephone = values[j].phonenum;            
             var lastname = values[j].epitheto;
+            var people = values[j].people;
             var time = values[j].time;
             var product_names = [];
             var quantitiesObj = values[j].quantities;
@@ -147,6 +148,7 @@ function handleMarkers(data, map) {
             content[index] = "<h2>Αίτηση "+j+"</h2>";
             content[index] += "<h2>Name: " + name + "</h2>"
             + "<h2>Last Name: " + lastname + "</h2>"
+            + "<p>People: " + people + "</br>"
             + "<p>Telephone: " + telephone + "</br>"
             + "<p>Ημερομηνία Δημ/γιας: " + time + "</br>"
             + "<p>Product Name: </br>";
