@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 08, 2024 at 09:04 PM
+-- Generation Time: Feb 09, 2024 at 08:46 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -39,10 +39,11 @@ CREATE TABLE `announcements` (
 --
 
 INSERT INTO `announcements` (`id_ann`, `text`, `time`, `title`) VALUES
-(6, 'Αναμένονται επικίνδυνα καιρικά φαινόμενα από το βράδυ της Κυριακής 21 Ιανουαρίου μέχρι και την Τρίτη.\nΜείνετε σε επιφυλακή', '2024-01-21', 'Βροχόπτωση 21 - 22 Ιανουαρίου'),
-(7, 'Αναμένονται επικίνδυνα καιρικά φαινόμενα από το βράδυ της Κυριακής 21 Ιανουαρίου μέχρι και την Τρίτη.\nΜείνετε σε επιφυλακή', '2024-01-21', 'Βροχόπτωση 21 - 22 Ιανουαρίου'),
-(8, 'ΤΕΣΤ ΤΕΣΤ', '2024-01-24', 'ΜΑΡΙΟΣ'),
-(9, 'Marios', '2024-02-02', 'Test');
+(15, 'Παρακαλώ, χρειαζόμαστε τα παρακάτω ροφήματα: ', '2024-02-09', 'Ανακοίνωση για ροφήματα'),
+(16, 'Παρακαλώ, χρειαζόμαστε τα παρακάτω τρόφημα: ', '2024-02-09', 'Ανακοίνωση για τρόφημα'),
+(17, 'Παρακαλώ, χρειαζόμαστε τα παρακάτω είδη ρουχισμού: ', '2024-02-09', 'Ανακοίνωση για ρουχισμό'),
+(19, 'Παρακαλώ, χρειαζόμαστε τα παρακάτω είδη εργλείων : ', '2024-02-09', 'Ανακοίνωση για εργαλεία'),
+(20, 'Παρακαλώ, χρειαζόμαστε τα παρακάτω φάρμακα : ', '2024-02-09', 'Ανακοίνωση για φάρμακα');
 
 -- --------------------------------------------------------
 
@@ -61,9 +62,29 @@ CREATE TABLE `announ_product` (
 --
 
 INSERT INTO `announ_product` (`id_ann_match`, `id_pro_match`, `id_match`) VALUES
-(9, 18, 5),
-(9, 21, 6),
-(9, 103, 7);
+(15, 16, 23),
+(15, 17, 24),
+(15, 85, 25),
+(16, 18, 26),
+(16, 19, 27),
+(16, 20, 28),
+(17, 36, 29),
+(17, 67, 30),
+(17, 69, 31),
+(17, 70, 32),
+(17, 71, 33),
+(17, 66, 34),
+(19, 59, 47),
+(19, 60, 48),
+(19, 63, 49),
+(19, 142, 50),
+(19, 144, 51),
+(19, 194, 52),
+(20, 176, 53),
+(20, 177, 54),
+(20, 186, 55),
+(20, 183, 56),
+(20, 185, 57);
 
 -- --------------------------------------------------------
 
@@ -85,7 +106,41 @@ INSERT INTO `base` (`id_base`, `id_item`, `quant`) VALUES
 (16, 16, 15),
 (17, 17, 26),
 (18, 22, 10),
-(19, 19, 49);
+(19, 19, 49),
+(20, 18, 5),
+(21, 20, 6),
+(22, 21, 8),
+(23, 37, 5),
+(24, 128, 5),
+(25, 146, 9),
+(26, 148, 11),
+(27, 25, 5),
+(28, 26, 4),
+(29, 29, 4),
+(30, 90, 12),
+(31, 91, 8),
+(32, 59, 4),
+(33, 60, 8),
+(34, 61, 3),
+(35, 62, 43),
+(36, 63, 6),
+(37, 64, 2),
+(38, 92, 2),
+(39, 109, 8),
+(40, 119, 1),
+(41, 142, 9),
+(42, 144, 3),
+(43, 194, 3),
+(44, 36, 2),
+(45, 65, 4),
+(46, 66, 60),
+(47, 67, 5),
+(48, 68, 7),
+(49, 69, 4),
+(50, 70, 4),
+(51, 71, 23),
+(52, 106, 43),
+(53, 85, 50);
 
 -- --------------------------------------------------------
 
@@ -132,7 +187,8 @@ INSERT INTO `category` (`cat_id`, `cat_name`) VALUES
 (40, 'test1'),
 (41, 'pet supplies'),
 (42, 'Μedicines'),
-(43, 'Energy Drinks');
+(43, 'Energy Drinks'),
+(50, 'cakes');
 
 -- --------------------------------------------------------
 
@@ -369,7 +425,9 @@ INSERT INTO `item` (`product_id`, `product_name`, `details`, `category`) VALUES
 (202, 'sanitary napkins', '[{\"detail_name\":\"30\",\"detail_value\":\"500g\"}]', 21),
 (203, 'COVID-19 Tests', '[{\"detail_name\":\"20\",\"detail_value\":\"\"}]', 16),
 (204, 'Club Soda', '[{\"detail_name\":\"volume\",\"detail_value\":\"500ml\"}]', 6),
-(205, 'testproduct', '[{\"detail_name\":\"test detail\",\"detail_value\":\"test value\"}]', 5);
+(205, 'testproduct', '[{\"detail_name\":\"test detail\",\"detail_value\":\"test value\"}]', 5),
+(206, 'red velvet', '[{\"detail_name\":\"quantity\",\"detail_value\":\"500gr\"}]', 50),
+(207, 'oreo cake', '[{\"detail_name\":\"weight\",\"detail_value\":\"200gr\"}]', 50);
 
 -- --------------------------------------------------------
 
@@ -390,10 +448,16 @@ CREATE TABLE `offers` (
 --
 
 INSERT INTO `offers` (`id_off`, `time`, `user`, `savior_id`, `accept_date`) VALUES
-(10, '2024-01-17', 5, NULL, NULL),
-(14, '2024-01-24', 30, NULL, NULL),
-(15, '2024-01-24', 30, 3, '2024-02-08'),
-(16, '2024-01-24', 30, 3, '2024-02-02');
+(10, '2024-01-17', 5, 3, '2024-02-09'),
+(14, '2024-01-24', 30, 3, '2024-02-09'),
+(15, '2024-01-24', 30, NULL, NULL),
+(16, '2024-01-24', 30, NULL, NULL),
+(18, '2024-02-09', 37, NULL, NULL),
+(19, '2024-02-09', 37, NULL, NULL),
+(21, '2024-02-09', 37, NULL, NULL),
+(22, '2024-02-09', 38, NULL, NULL),
+(23, '2024-02-09', 38, NULL, NULL),
+(24, '2024-02-09', 38, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -416,7 +480,23 @@ INSERT INTO `off_item_link` (`id_off_l`, `id_item_l`, `quant`, `id_link_off`) VA
 (10, 16, 15, 18),
 (14, 17, 16, 19),
 (15, 19, 23, 20),
-(16, 21, 12, 21);
+(16, 21, 12, 21),
+(18, 16, 10, 22),
+(18, 17, 6, 23),
+(19, 20, 12, 24),
+(19, 18, 6, 25),
+(21, 185, 4, 26),
+(21, 184, 3, 27),
+(21, 183, 2, 28),
+(22, 36, 4, 29),
+(22, 71, 8, 30),
+(22, 69, 4, 31),
+(23, 142, 12, 32),
+(23, 194, 6, 33),
+(23, 63, 5, 34),
+(24, 176, 20, 35),
+(24, 183, 16, 36),
+(24, 185, 4, 37);
 
 -- --------------------------------------------------------
 
@@ -445,7 +525,7 @@ CREATE TABLE `person` (
 INSERT INTO `person` (`user_id`, `onoma`, `epitheto`, `phonenum`, `usertype`, `Latitude`, `Longitude`, `username`, `pwd`, `salt`, `pepper`) VALUES
 (1, 'Marios', 'Tsaltakis', '6971634975', 'citizen', 38.2454, 21.7343, 'mariostsal', '95252cff555f3ab29bc2f3733322cb91ce1cc8da32302335762a4d62ab10ef9b', '3f250b937403e64a87cecc7a05611fa8', 'SuperSecureOrganicPepper'),
 (2, 'base', 'mparoutis', '6971634974', 'admin', 38.2476, 21.7285, 'raskal', 'b3bce55160fad23c46d6e0b93c1103faeebccc00278acd376086d8375ae2ea92', 'ac5bfee50fa54124280c94a74027a72d', 'SuperSecureOrganicPepper'),
-(3, 'konstantinos', 'basiladiotis', '6971634976', 'savior', 38.2453, 21.7385, 'kostis', 'c01c58d936a26d20d5476e96775ea09e81e1053c3182099c3360ed75bc6d35d4', '0669db551499477a9343d88af24d58d5', 'SuperSecureOrganicPepper'),
+(3, 'konstantinos', 'basiladiotis', '6971634976', 'savior', 38.2483, 21.734, 'kostis', 'c01c58d936a26d20d5476e96775ea09e81e1053c3182099c3360ed75bc6d35d4', '0669db551499477a9343d88af24d58d5', 'SuperSecureOrganicPepper'),
 (4, 'Γεώργιος', 'Τσαλτάκης', '6934345345', 'citizen', 38.2463, 21.7351, 'TsaltakisGeorgios', 'e585f3d02d977be2d76da81166a6db0d20c4d055fc72bf011561c19ab06e02f7', '6cdc171307b640db9ccde0078516840a', 'SuperSecureOrganicPepper'),
 (5, 'Melpo', 'kapsali', '1234123444', 'citizen', 38.2548, 21.7385, 'Melpo', '4bd5a2620642ffebd5701da0dbd1bed1358bd3d509a1669c4a0445934754a368', '57382f94d51ae11468279e4363bd04b1', 'SuperSecureOrganicPepper'),
 (6, 'Marios', 'Tsaltakis', '2345235234', 'citizen', 38.2457, 21.7345, 'mariostsal2', 'e1b19db6d44439fcc0a42e3e2e3d2aba995d706589f875b770581e6e82f54859', '523a9ac4aa2caf4a981a2440fb020b67', 'SuperSecureOrganicPepper'),
@@ -465,7 +545,22 @@ INSERT INTO `person` (`user_id`, `onoma`, `epitheto`, `phonenum`, `usertype`, `L
 (27, 'Konstantinos', 'Tsakiridis', '6944967711', 'savior', 38.2449, 21.7399, 'kontsaki', '2c29f7c25e9054381fe2a8d00680300b62973df96aee421a81ef2e08cf0bcaad', 'd913f0debc7d514755ef9c1cb9bc8697', 'SuperSecureOrganicPepper'),
 (28, 'MariosTest', 'TestTsalt', '6971634975', 'savior', 38.2448, 21.7326, 'test_tsaki', '9668de201dc6426602fccdf37eb0b2cde0ad89aecec443798d19afa64993130f', '60c9ef8d41c5f1a0540dadeaba61d68d', 'SuperSecureOrganicPepper'),
 (29, 'Vasilina', 'Tsakiridi', '6912345678', 'savior', 38.2433, 21.7378, 'vastsaki', '3a906a1d9ec6bfb984787792f03fa1a235af6c90fa28981f5614d7b67ea519bf', 'b9bc8c124a8ce5dbf2aacb7d77ed3e15', 'SuperSecureOrganicPepper'),
-(30, 'Marios ', 'asdfas', '6971634975', 'citizen', 38.2455, 21.7395, 'Marios', 'fe6cbb70f6d533109ad8b28a1cde3a5c75818e7ffcf4e993c6133f54499228be', 'c2a7158effc0fc81622fb3c48b5ad016', 'SuperSecureOrganicPepper');
+(30, 'Marios ', 'asdfas', '6971634975', 'citizen', 38.2455, 21.7395, 'Marios', 'fe6cbb70f6d533109ad8b28a1cde3a5c75818e7ffcf4e993c6133f54499228be', 'c2a7158effc0fc81622fb3c48b5ad016', 'SuperSecureOrganicPepper'),
+(31, 'Γιάννης ', 'Παπαδόπουλος', '6987923650', 'citizen', 38.2428, 21.7388, 'johny', '8db07c63f6e811c92d32eaa801d87cc4f36cb3d4532014d175e79b2fbb488c2d', '3910726380998b03cff966647eb3d29d', 'SuperSecureOrganicPepper'),
+(32, 'petros', 'panagiwtopoulos', '6988736452', 'savior', 38.2467, 21.7383, 'peterpeter', '83be0f919d4c39806a4fe36580aca27779bfa226664d3967e451c0315a46c3dc', 'a493caf40a2bee717cc66175ee8f3df4', 'SuperSecureOrganicPepper'),
+(33, 'Μάριος ', 'Κανάβας', '6987954444', 'citizen', 38.2486, 21.7342, 'Mario', '2292d127e462502debd7b2072024aaa62613b9ca36ab47ea94676e70151b81a1', '0818735215cdbf5c7fed6c7a5d30ab37', 'SuperSecureOrganicPepper'),
+(34, 'anastasis', 'gewrgakopoulos', '6944526374', 'savior', 38.2434, 21.7303, 'anastasispap12', 'fb3e47df524f9b3ae416a3999ac5d309a76d282f94423037280453f6b3db1af2', '7a373ebba5f4ac761322eb0af8472760', 'SuperSecureOrganicPepper'),
+(35, 'kwnstantinos', 'petropoulos', '6946738234', 'savior', 38.2425, 21.7349, 'kwnkwn12', 'ca8368467ab269dd444a0a7004a1916a189fbf0f6ab3fb0f43f2ada500278a3a', '788d83ac1198b5161b924041bc56e7df', 'SuperSecureOrganicPepper'),
+(36, 'Άννα', 'Γεωργίου', '6987955333', 'citizen', 38.2375, 21.7298, 'Anna', '29871e84924e0dfae605c199abd5bdf497522f3accf813567cd2e8b7bd6ec080', '8964f14a784d9537761f160c321b3af9', 'SuperSecureOrganicPepper'),
+(37, 'Χριστίνα', 'Πετροπούλου', '6987959090', 'citizen', 38.2356, 21.7364, 'Christina', '8bbe80fca9560d8fb5b00e0d36a6a5dd0af5aaaafd47b5101f676049976b0887', '47f6e2f579422aeeaf63c0bc0db6520f', 'SuperSecureOrganicPepper'),
+(38, 'Αλέξης', 'Κωνσταντίνου', '6982345221', 'citizen', 38.2421, 21.7281, 'Alex', 'd699ada29461b19ccd63e650793236d1f552bde1bb6816a19f6406e7ffc2855c', '312e797ce5c33d8d925cd0b04471976f', 'SuperSecureOrganicPepper'),
+(39, 'Dionisis', 'Plessas', '6971634978', 'citizen', 38.2452, 21.7431, 'TheFamousGuy', 'fce78ba3be0a3fe98d3f88b664f042ef59f63de40036a9fd9274ae46d419ab38', '0ab9eff042dd2e90544339057b9d9ecd', 'SuperSecureOrganicPepper'),
+(40, 'Panagiotis', 'Mpouras', '6911111111', 'citizen', 38.2514, 21.7411, 'Bouras', '020d16e6bd0ce43038dc1c75bdefce07c73a5a5863e8825ca9a8a33de451146e', '1b6b1cbf6bbeeeb4d3830bb7f176fd37', 'SuperSecureOrganicPepper'),
+(41, 'Makis', 'Papas', '6986876961', 'savior', 1, 1, 'Makis', '0b89047ccf4849bb880bfb00c6eef5e836da88ef5b3962b3265aeb40fc4a30f4', 'fbe0a45d0aa53d2a6b2e52279c085425', 'SuperSecureOrganicPepper'),
+(42, 'mimis', 'mimis', '69878776', 'savior', 1, 1, 'mimis', '60a719d3d408c490a9408dc852beae35ce1b5f78f8959a99dc4308a5e6d8355e', 'cb322ba20c3dcb9cadb4f378c23ed3d0', 'SuperSecureOrganicPepper'),
+(43, 'Test', 'Test', '6971431575', 'savior', 1, 1, 'TestUser', '6f41177a3671a34332008bb99f6639d47cd2c42a0cc3372a3d4a9c3cbcee3d85', 'a18b5df0702815de9db238a1d8cc1e2c', 'SuperSecureOrganicPepper'),
+(44, 'george', 'panagiwtou', '698477568', 'citizen', 38.2424, 21.7314, 'geogeo', 'c7ff91392217efc56f1a87668f93d14a0cba41dced2052c1fcb90eb3fd3b3ac5', '39b1fe0fc0eda9dec9d6598da423b56e', 'SuperSecureOrganicPepper'),
+(45, 'Dimitris', 'Manouras', '6971757153', 'savior', 38.2453, 21.7429, 'Manou', '388f9aed8a4395c9664989b0ed1ea61b82a9b3782c37faba4992b4ad145fff4d', '2285d35aab9d93ec862343e1efd9f470', 'SuperSecureOrganicPepper');
 
 -- --------------------------------------------------------
 
@@ -489,7 +584,19 @@ CREATE TABLE `request` (
 
 INSERT INTO `request` (`id_req`, `people`, `time`, `user`, `savior_id`, `accept_date`, `state`) VALUES
 (10, 5, '2024-02-02', 1, NULL, NULL, 'nothing'),
-(11, 15, '2024-02-02', 1, NULL, NULL, 'nothing');
+(11, 15, '2024-02-02', 1, NULL, NULL, 'nothing'),
+(12, 4, '2024-02-09', 31, NULL, NULL, 'nothing'),
+(13, 2, '2024-02-09', 31, NULL, NULL, 'nothing'),
+(14, 3, '2024-02-09', 31, NULL, NULL, 'nothing'),
+(15, 6, '2024-02-09', 31, NULL, NULL, 'nothing'),
+(16, 1, '2024-02-09', 33, 3, '2024-02-09', 'accepted'),
+(17, 1, '2024-02-09', 33, NULL, NULL, 'nothing'),
+(18, 5, '2024-02-09', 33, NULL, NULL, 'nothing'),
+(19, 2, '2024-02-09', 33, NULL, NULL, 'nothing'),
+(20, 4, '2024-02-09', 36, NULL, NULL, 'nothing'),
+(21, 4, '2024-02-09', 36, NULL, NULL, 'nothing'),
+(22, 4, '2024-02-09', 36, NULL, NULL, 'nothing'),
+(23, 4, '2024-02-09', 36, NULL, NULL, 'nothing');
 
 -- --------------------------------------------------------
 
@@ -516,7 +623,34 @@ INSERT INTO `req_item_link` (`id_link_req`, `id_item_l`, `id_req_l`) VALUES
 (21, 139, 11),
 (22, 146, 11),
 (23, 148, 11),
-(24, 149, 11);
+(24, 149, 11),
+(25, 16, 12),
+(26, 17, 12),
+(27, 19, 13),
+(28, 20, 13),
+(29, 36, 14),
+(30, 71, 14),
+(31, 185, 15),
+(32, 183, 15),
+(33, 85, 16),
+(34, 20, 17),
+(35, 18, 17),
+(36, 69, 18),
+(37, 67, 18),
+(38, 194, 19),
+(39, 142, 19),
+(40, 17, 20),
+(41, 16, 20),
+(42, 85, 20),
+(43, 18, 21),
+(44, 20, 21),
+(45, 19, 21),
+(46, 186, 22),
+(47, 185, 22),
+(48, 183, 22),
+(49, 36, 23),
+(50, 66, 23),
+(51, 67, 23);
 
 -- --------------------------------------------------------
 
@@ -534,7 +668,11 @@ CREATE TABLE `vehicle` (
 --
 
 INSERT INTO `vehicle` (`id_veh`, `username_veh`) VALUES
-(3, 'test');
+(3, 'test'),
+(4, 'peterpeter'),
+(5, 'anastasispap12'),
+(6, 'kwnkwn12'),
+(45, 'Manou');
 
 --
 -- Indexes for dumped tables
@@ -612,7 +750,8 @@ ALTER TABLE `off_item_link`
 -- Indexes for table `person`
 --
 ALTER TABLE `person`
-  ADD PRIMARY KEY (`user_id`);
+  ADD PRIMARY KEY (`user_id`),
+  ADD UNIQUE KEY `username` (`username`);
 
 --
 -- Indexes for table `request`
@@ -644,25 +783,25 @@ ALTER TABLE `vehicle`
 -- AUTO_INCREMENT for table `announcements`
 --
 ALTER TABLE `announcements`
-  MODIFY `id_ann` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_ann` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `announ_product`
 --
 ALTER TABLE `announ_product`
-  MODIFY `id_match` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_match` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT for table `base`
 --
 ALTER TABLE `base`
-  MODIFY `id_base` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id_base` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `cat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `cat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `finished_offers`
@@ -680,43 +819,43 @@ ALTER TABLE `finished_requests`
 -- AUTO_INCREMENT for table `item`
 --
 ALTER TABLE `item`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=206;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=208;
 
 --
 -- AUTO_INCREMENT for table `offers`
 --
 ALTER TABLE `offers`
-  MODIFY `id_off` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_off` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `off_item_link`
 --
 ALTER TABLE `off_item_link`
-  MODIFY `id_link_off` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_link_off` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `person`
 --
 ALTER TABLE `person`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `request`
 --
 ALTER TABLE `request`
-  MODIFY `id_req` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_req` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `req_item_link`
 --
 ALTER TABLE `req_item_link`
-  MODIFY `id_link_req` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id_link_req` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `vehicle`
 --
 ALTER TABLE `vehicle`
-  MODIFY `id_veh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_veh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- Constraints for dumped tables
