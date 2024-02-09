@@ -1,6 +1,1 @@
 Options -Indexes
-RewriteEngine On
-RewriteCond %{REQUEST_METHOD} ^GET$
-RewriteCond %{HTTP:X-Requested-With} !^XMLHttpRequest$
-RewriteCond %{REQUEST_URI} ^/php/.*$
-RewriteRule ^.*$ /index.php [R=403,L]
