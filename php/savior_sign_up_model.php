@@ -31,5 +31,9 @@ function set_savior_profile(object $conn,string $username1,string $password1,str
     $check->bindParam(":salt",$salt);
     $check->bindParam(":pepper",$pepper);
     $check->execute();
+    $select = "INSERT INTO vehicle(username_veh) VALUES (:username)";
+    $check = $conn->prepare($select);
+    $check->bindParam(":username",$username1);
+    $check->execute();
 }
 ?>
